@@ -26,6 +26,7 @@ class Pelicula(models.Model):
     clasificacion = models.CharField(blank=True, max_length=2)
     genero = models.CharField(blank=True, max_length=100)
     imagen = models.ImageField(upload_to="peliculas", height_field=400, width_field=400)
+    boleteria = models.ForeignKey(Boleteria,on_delete=models.CASCADE)
 
     class Admin:
         list_display = ('',)
@@ -43,6 +44,7 @@ class Sala(models.Model):
     numero_filas = models.IntegerField(blank=True, null=True)
     numero_columnas = models.IntegerField(blank=True, null=True)
     clase = models.CharField(blank=True, max_length=100)
+    boleteria = models.ForeignKey(Boleteria,on_delete=models.CASCADE)
 
     class Admin:
         list_display = ('',)
@@ -83,3 +85,19 @@ class Boleto(models.Model):
 
     def __str__(self):
         return f"{self.tipo_cliente} ${self.precio}"
+
+
+class Butaca(models.Model):
+    """(Butaca description)"""
+    numero_asiento = models.IntegerField(blank=True, null=True)
+    fila = models.CharField(blank=True, max_length=2)
+    disponibilidad = models.BooleanField(default=True)
+    clase = models.CharField(blank=True, max_length=100)
+    Sala = models.ForeignKey(Sala,on_delete=models.CASCADE)
+    
+    class Admin:
+        list_display = ('',)
+        search_fields = ('',)
+
+    def __str__(self):
+        return f"{self.fila}{self.numero_asiento}"
