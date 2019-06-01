@@ -51,8 +51,8 @@ class Combo(models.Model):
 
 class DetalleCombo(models.Model):
     """(DetalleCombo description)"""
-    combo = models.ForeignKey(Combo,on_delete)
-    golosina = models.ForeignKey(Golosina)
+    combo = models.ForeignKey(Combo,on_delete=models.CASCADE)
+    golosina = models.ForeignKey(Golosina,on_delete=models.CASCADE)
 
     class Admin:
         list_display = ('',)
