@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block tittle %}
+    Cartelera
+{% endblock tittle %}
+
+{% block content %}
+    
+    <ul class="list-unstyled">
+        {% for funcion in funciones %}
+            <li class="media">
+                <a class="d-flex" href="#">
+                    <img src="{{funcion.pelicula.imagen.url}}" alt="" width="200" height="300">
+                </a>
+                <div class="media-body">
+                    <h5>{{funcion.pelicula.nombre}}</h5>
+                    <p>Duracion : {{funcion.pelicula.duracion}}min</p>
+                    <p>Pais : {{funcion.pelicula.pais}} Año : {{funcion.pelicula.anyo}}</p>
+                    <p>Sinopsis : {{funcion.pelicula.sinopsis}}</p>
+                    <p>Formato : {{funcion.formato}} Lenguaje : {{funcion.lenguaje}}</p>
+                    <p>Horario :  {{funcion.hora}} Fecha : {{funcion.fecha}}</p>
+                </div>
+                <hr>
+            </li> 
+            <br>
+        {% empty %}
+          <h5>No hay funciones que presentar</h5>
+        {% endfor %}
+        
+      </ul>
+
+{% endblock content %}
+    
