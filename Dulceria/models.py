@@ -5,7 +5,7 @@ from django.db import models
 class Dulceria(models.Model):
     """(Dulceria description)"""
     nombre = models.CharField(blank=True, max_length=100)
-    logo = models.ImageField(upload_to="imagenes/", height_field=400, width_field=400)
+    #logo = models.ImageField(upload_to="imagenes/", height_field=4000, width_field=4000)
     eslogan = models.CharField(blank=True, max_length=100)
 
     class Admin:
@@ -21,9 +21,9 @@ class Golosina(models.Model):
     nombre = models.CharField(blank=True, max_length=100)
     precio = models.DecimalField(max_digits=5, decimal_places=2)
     descripcion = models.TextField(blank=True)
-    caducidad = models.DateField(default=datetime.datetime.today)
+    #caducidad = models.DateField(default=datetime.datetime.today)
     disponibilidad = models.BooleanField(default=True)
-    dulceria = models.ForeignKey(Dulceria)
+    dulceria = models.ForeignKey(Dulceria,on_delete="CASCADE")
 
     class Admin:
         list_display = ('',)
@@ -39,7 +39,7 @@ class Combo(models.Model):
     precio = models.DecimalField(max_digits=5, decimal_places=2)
     descripcion = models.TextField(blank=True)
     disponibilidad = models.BooleanField(default=True)
-    dulceria = models.ForeignKey(Dulceria)
+    dulceria = models.ForeignKey(Dulceria,on_delete="CASCADE")
 
     class Admin:
         list_display = ('',)

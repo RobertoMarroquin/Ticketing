@@ -40,9 +40,10 @@ class FuncionList(ListView):
     context_object_name = 'funciones'
     template_name='Boleteria/cartelera.html'
 
-    
-    
-    
+
+def carousel(request):
+
+    return render(request,"Boleteria/carousel.html",{})
     
 ###-----Serializacion de listas de objetos    
 #def get(self, request,fecha=datetime.date.today()):
