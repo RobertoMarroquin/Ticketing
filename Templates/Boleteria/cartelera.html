@@ -1,33 +1,29 @@
 {% extends 'base.html' %}
 
-{% block tittle %}
+{% block title %}
     Cartelera
-{% endblock tittle %}
+{% endblock title %}
 
 {% block content %}
     
-    <ul class="list-unstyled">
-        {% for funcion in funciones %}
-            <li class="media">
-                <a class="d-flex" href="#">
-                    <img src="{{funcion.pelicula.imagen.url}}" alt="" width="200" height="300">
-                </a>
-                <div class="media-body">
-                    <h5>{{funcion.pelicula.nombre}}</h5>
-                    <p>Duracion : {{funcion.pelicula.duracion}}min</p>
-                    <p>Pais : {{funcion.pelicula.pais}} Año : {{funcion.pelicula.anyo}}</p>
-                    <p>Sinopsis : {{funcion.pelicula.sinopsis}}</p>
-                    <p>Formato : {{funcion.formato}} Lenguaje : {{funcion.lenguaje}}</p>
-                    <p>Horario :  {{funcion.hora}} Fecha : {{funcion.fecha}}</p>
+<div class="row">
+        {% for funcion in funciones %} 
+            <div class="card col-3" style="padding:10px">
+
+                <img class="card-img-top" src="{{funcion.pelicula.imagen.url}}" alt="Card image cap" height="400">
+                <div class="card-body">
+                    <h5 class="card-title">{{funcion.pelicula.nombre}}</h5>
+                    <p class="card-text">Horario: {{funcion.fecha}} {{funcion.hora}} </p>
+                    <p class="card-text">Formato: {{funcion.formato}} Lenguaje:{{funcion.lenguaje}}</p>
+                    <a href="{% url 'boleteria:funcion' funcion.id %}" class="btn btn-primary">Comprar</a>
                 </div>
-                <hr>
-            </li> 
-            <br>
+            </div>
         {% empty %}
           <h5>No hay funciones que presentar</h5>
         {% endfor %}
-        
-      </ul>
+        </div>
+
+      
 
 {% endblock content %}
     
