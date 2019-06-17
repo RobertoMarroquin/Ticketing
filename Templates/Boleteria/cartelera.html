@@ -5,9 +5,44 @@
 {% endblock title %}
 
 {% block content %}
-    
+
+        <div class="container">
+                    <div class="row-fluid">
+                        <div class="span3">
+                            <b>1</b>
+                            <select id="fecha" class="form-control">
+                                        <option value="-1">Seleccione Fecha:</option>
+                                        </select>
+                        </div>
+                        <div class="span3">
+                            <b>2</b>
+                             <select id="pelicula" class="form-control" disabled="">
+                                        <option value="-1">Seleccione Película:</option>
+                                    </select>
+                        </div>
+                        <div class="span3">
+                            <b>3</b>
+                            <select id="formato" class="form-control" disabled="">
+                                        <option value="-1">Seleccione Formato:</option>
+                                    </select>
+                        </div>
+                        <div class="span3">
+                            <b>4</b>
+                            <select id="idioma" class="form-control" disabled="">
+                                        <option value="-1">Seleccione el idioma:</option>
+                            </select>
+                        </div>
+                        <div class="span3">
+                            <b>5</b>
+                            <select id="hora" class="form-control" disabled="">
+                                        <option value="-1">Seleccione Hora:</option>
+                            </select>
+                        </div>
+                    </div>
+        </div> <br>
+
 <div class="row">
-        {% for funcion in funciones %} 
+        {% for funcion in funciones %}
             <div class="card col-3" style="padding:10px">
 
                 <img class="card-img-top" src="{{funcion.pelicula.imagen.url}}" alt="Card image cap" height="400">
@@ -22,8 +57,5 @@
           <h5>No hay funciones que presentar</h5>
         {% endfor %}
         </div>
-
-      
-
+        <script src="/static/js/filtro.js" defer></script>
 {% endblock content %}
-    
