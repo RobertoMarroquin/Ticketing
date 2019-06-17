@@ -1,86 +1,48 @@
 from django.db import models
-from Boleteria.models import *
-from Dulceria.models import *
 
-
-class Carrito(models.Model):
-    """Model definition for Carrito."""
-
-    total = models.DecimalField(("Total"), max_digits=6, decimal_places=2)
-    cantidadProductos = models.IntegerField(("Cantidad de Productos"))
-    tipoPago = models.CharField(("Tipo de Pago"), max_length=50)
-    tiempoRestante = models.TimeField(("Tiempo Restante"), auto_now=False, auto_now_add=False)
-    entregado = models.BooleanField((""))
-    cancelado = models.BooleanField((""))
-    codigoCompra = models.CharField(("Codigo Compra"), max_length=50)
-    tarjeta = models.ForeignKey('TarjetaCredito', on_delete=models.CASCADE)
-
-
-    class Meta:
-        """Meta definition for Carrito."""
-
-        verbose_name = 'Carrito'
-        verbose_name_plural = 'Carritos'
+# Create your models here.
+import datetime
+class Dulceria(models.Model):
+    """(Dulceria description)"""
+    nombre = models.CharField(blank=True, max_length=100)
+    logo = models.ImageField(blank=True, null=True,upload_to="imagenes/", height_field=400, width_field=400)
+    eslogan = models.CharField(blank=True, max_length=100)
 
     def __str__(self):
-        """Unicode representation of Carrito."""
-        return self.total
+        return f"{self.nombre}"
 
 
-class LineaVenta(models.Model):
-    """Model definition for LineaVenta."""
-    nombreProducto = models.CharField(("Nombre"), max_length=50)
-    cantidad = models.IntegerField(())
-    tipoProducto = models.CharField(max_length=100, blank=True, null=True)
-    idProducto = models.IntegerField(("idProducto")) #Llave Foranea 
-    precio = models.DecimalField(("Precio"), max_digits=6, decimal_places=2)
-    subtotal = models.DecimalField(("subtotal"), max_digits=5, decimal_places=2)
-    
-    carrito = models.ForeignKey('Carrito', related_name='carrito', on_delete=models.CASCADE)
-    class Meta:
-        """Meta definition for LineaVenta."""
-
-        verbose_name = 'LineaVenta'
-        verbose_name_plural = 'LineaVentas'
+class Golosina(models.Model):
+    """(Golosina description)"""
+    nombre = models.CharField(blank=True, max_length=100)
+    precio = models.DecimalField(max_digits=5, decimal_places=2)
+    descripcion = models.TextField(blank=True)
+    caducidad = models.DateField(default=datetime.datetime.today)
+    disponibilidad = models.BooleanField(default=True)
+    dulceria = models.ForeignKey(Dulceria,on_delete= models.CASCADE)
 
     def __str__(self):
-        """Unicode representation of LineaVenta."""
-        return f'{self.nombreProducto} {self.cantidad}'
+        return f"{self.nombre}"
 
 
-class Cliente(models.Model):
-    """Model definition for Cliente."""
-    nombre = models.CharField(max_length=100, blank=True, null=True)
-    correo = models.EmailField(("Correo Electronico"), max_length=254)
+class Combo(models.Model):
 
-    class Meta:
-        """Meta definition for Cliente."""
+    nombre = models.CharField(blank=True, max_length=100)
+    precio = models.DecimalField(max_digits=5, decimal_places=2)
+    descripcion = models.TextField(blank=True)
+    disponibilidad = models.BooleanField(default=True)
+    dulceria = models.ForeignKey(Dulceria,on_delete= models.CASCADE)
 
-        verbose_name = 'Cliente'
-        verbose_name_plural = 'Clientes'
 
     def __str__(self):
-        """Unicode representation of Cliente."""
-        return f'{self.nombre }'
+        return f"{self.nombre}"
 
 
-class TarjetaCredito(models.Model):
-    """Model definition for TajetaCredito."""
+class DetalleCombo(models.Model):
+    """(DetalleCombo description)"""
+    combo = models.ForeignKey(Combo,on_delete=models.CASCADE)
+    golosina = models.ForeignKey(Golosina,on_delete=models.CASCADE)
 
-    numero = models.IntegerField((""))
-    fechaVencimiento = models.DateField((""), auto_now=False, auto_now_add=False)
-    ccv = models.IntegerField((""))
-    marca = models.CharField((""), max_length=50)
-    titular = models.ForeignKey('Cliente', related_name='titular', on_delete=models.CASCADE)
-
-
-    class Meta:
-        """Meta definition for TajetaCredito."""
-
-        verbose_name = 'Tajeta de Credito'
-        verbose_name_plural = 'TajetaCreditos'
 
     def __str__(self):
-        """Unicode representation of TajetaCredito."""
-        return f'{self.numero}'
-
+        return f"{self.combo.id}-{self.golosina.id}"
