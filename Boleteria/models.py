@@ -75,9 +75,8 @@ class Butaca(models.Model):
     numero_asiento = models.IntegerField(blank=True, null=True)
     fila = models.CharField(blank=True, max_length=2)
     disponibilidad = models.BooleanField(default=True)
-    clase = models.CharField(blank=True, max_length=100)
+    clase = models.BooleanField(default=True)
     Sala = models.ForeignKey(Sala,on_delete=models.CASCADE)
-
 
     def __str__(self):
         return f"{self.fila}{self.numero_asiento}"
