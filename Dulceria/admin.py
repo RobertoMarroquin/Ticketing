@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.contrib import admin
 from .models import Dulceria, Combo,Golosina,DetalleCombo
 # Register your models here.
@@ -19,3 +20,18 @@ class ComboAdmin(admin.ModelAdmin):
 admin.site.register(Combo, ComboAdmin)
 admin.site.register(Golosina, GolosinaAdmin)
 admin.site.register(Dulceria, DulceriaAdmin)
+=======
+from django.contrib import admin
+from .models import Dulceria, Combo,DetalleCombo,Golosina
+# Register your models here.
+
+admin.site.register(Dulceria)
+admin.site.register(Combo)
+admin.site.register(DetalleCombo)
+admin.site.register(Golosina)
+
+
+
+
+
+>>>>>>> Boleteria
