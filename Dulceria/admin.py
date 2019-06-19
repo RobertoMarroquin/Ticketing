@@ -13,7 +13,7 @@ class DetalleComboAdmin(admin.StackedInline):
     extra=0
 
 class ComboAdmin(admin.ModelAdmin):
-    list_display = ('nombre','precio','disponibilidad' )
+    list_display = ('nombre','precio','disponibilidad')
     inlines=[DetalleComboAdmin]
 
 admin.site.register(Combo, ComboAdmin)

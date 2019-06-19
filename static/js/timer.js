@@ -34,6 +34,13 @@ if (getCookie("horaCarrito")!==""){
     }
   },1000);
 }
+else if(document.getElementById("carritoN").textContent!=0){
+  document.getElementById("timer").removeAttribute("hidden");
+  document.getElementById("leSeparatorTime").removeAttribute("hidden");
+  document.getElementById("timer").style.color="";
+  document.getElementById("carritoN").textContent=0;
+  document.getElementById("timer").textContent="Carrito vaciado";
+}
 
 function getCookie(cname) {
   let name = cname + "=";
