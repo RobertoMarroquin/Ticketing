@@ -1,0 +1,39 @@
+.contenedor-boletos{
+    width: 30%;
+    margin: auto;
+    padding: 10px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    
+
+}
+.tipo-boleto{
+    margin-bottom: 5px;
+    display: flex;
+    flex-flow: row nowrap;
+    
+    
+}
+.tipo-boleto-addon{
+    width: 75%;
+    height: 40px;
+    padding-right: 10px;
+    background: #e4e1e1;
+    border-radius: 4px 0 0 4px ;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-grow: 1;
+}
+.tipo-boleto-num{
+    height: 40px;
+    border-radius: 0 4px 4px 0;
+    border: none;
+}
+
+.contenedor-boletos div a{
+    text-decoration: none;
+    color: #e4e1e1;
+}
+

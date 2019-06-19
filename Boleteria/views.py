@@ -12,6 +12,8 @@ import datetime
 import json
 
 from .models import Butaca,Pelicula,Sala,Funcion,Boleteria,Boleto
+from Facturacion.views import CarritoSession,LineaVentaSession
+from Facturacion.models import LineaVenta,Carrito
 # Create your views here.
 
 class PeliculaView(View):
@@ -33,9 +35,6 @@ class PeliculaView(View):
         terceraEdad = int(request.POST["terceraEdad"])
         estudiantes = int(request.POST["estudiantes"])
         funcion = request.POST["funcion"]
-        for i in range(adultos):
-            ticket = Boleto.objects.get(tipo=adulto)
-            boleto = Boleto.create(funcion=funcion,boleto=ticket)
         return HttpResponse('POST request!')
 
 class FuncionList(ListView):
@@ -45,35 +44,34 @@ class FuncionList(ListView):
     ordering = ['fecha','hora']
 
 
-class Prueba(View):
-    def get(self, request,fecha=datetime.date.today()):
-        fecha = fecha
-        funciones = list(Funcion.objects.all())#filter(fecha=fecha))
-        listaJson = json.loads(serializers.serialize('json',funciones))
-        #serialized = json.dumps(dict_funcion)
-        print(funciones)
-        print(listaJson)
-        return render(request,"prueba.html",context = {'listaJson' : listaJson})
-
-    def post(self, request, *args, **kwargs):
-        return HttpResponse('POST request!')
-
-
 class FuncionView(View):
     def get(self, request, id):
         funcion = Funcion.objects.get(id=id)
+        print(request.session.items())
 
         return render(request,"Boleteria/funcion.html",{'funcion':funcion})
 
     def post(self, request,id):
+
+        print(CarritoSession(request))
 
         funcion = Funcion.objects.get(id=id)
         adultos = int(request.POST["adultos"])
         ninos = int(request.POST["ninos"])
         mayores = int(request.POST["mayores"])
         
-        for i in range(adultos):
-           pass 
+
+        if adultos != 0:
+            boleto = Boleto.objects.get(tipo_cliente="Adulto")
+            LineaVentaSession(request,'b',boleto.id,adultos)
+
+        if ninos != 0:
+            boleto = Boleto.objects.get(tipo_cliente="Nino")
+            LineaVentaSession(request,'b',boleto.id,ninos)
+
+        if mayores != 0:
+            boleto = Boleto.objects.get(tipo_cliente="Mayor")
+            LineaVentaSession(request,'b',boleto.id,mayores)
 
         return redirect("boleteria:cartelera")
 
@@ -83,9 +81,6 @@ class SeleccionButacas(View):
         return render(request,"",{})
 
     def post(self, request):
-        
-        request
-
         return render(request,"",{})
 
 
