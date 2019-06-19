@@ -1,6 +1,6 @@
 let camposBoleteria=document.getElementsByClassName("form-control");
 let tamCampos=camposBoleteria.length;
-let butacasDisponibles=30;
+let butacasDisponibles=30;//esto me lo mandará el servidor
 let boletosTotales=0;
 
 for(let i=0;i<tamCampos;i++){
@@ -12,6 +12,8 @@ function validar(wx){
   wxw=wx.value;
   boletosTotales=0;
   for (let u=0;u<tamCampos;u++){boletosTotales+=Number(camposBoleteria[u].value);}
+  if (boletosTotales===0){document.getElementById("selectButaca").setAttribute("disabled","");}
+  else{document.getElementById("selectButaca").removeAttribute("disabled");}
   if (wxw%1!==0){
     wx.value=Math.floor(wxw);
     tostada("¡No puedes comprar fracciones de boletos!","#f8d7da","#721c24");

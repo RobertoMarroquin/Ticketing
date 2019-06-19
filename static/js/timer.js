@@ -7,6 +7,12 @@ if (getCookie("horaCarrito")!==""){
     let minuto=formatear(Math.floor((distancia%(1000*60*60))/(1000*60)));
     let segundo=formatear(Math.floor((distancia%(1000*60))/1000));
 
+    if (document.getElementById("timer").hidden){
+      document.getElementById("timer").removeAttribute("hidden");
+      document.getElementById("temporizador").removeAttribute("hidden");
+      document.getElementById("leSeparatorTime").removeAttribute("hidden");
+    }
+
     if (hora!="00"){document.getElementById("timer").textContent=hora+":"+minuto+":"+segundo;}
     else {document.getElementById("timer").textContent=minuto+":"+segundo;}
 
@@ -21,6 +27,9 @@ if (getCookie("horaCarrito")!==""){
     if (distancia<0){
       clearInterval(x);
       document.getElementById("timer").style.color="";
+      document.getElementById("temporizador").setAttribute("hidden","");
+      //document.getElementById("leSeparatorTime").setAttribute("hidden","");
+      document.getElementById("carritoN").textContent=0;
       document.getElementById("timer").textContent="Carrito vaciado";
     }
   },1000);
