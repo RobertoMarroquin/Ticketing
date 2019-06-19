@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Cartelera
+{% endblock title %}
+
+{% block content %}
+<link href="/static/css/filtro.css"  rel="stylesheet" >
+  <div class="row-fluid envoltura">
+    <div class="span3 filtro">
+      <select class="form-control"><option value="-1">Seleccione Fecha:</option></select>
+    </div><br>
+    <div class="span3 filtro">
+       <select class="form-control" disabled=""><option value="-1">Seleccione Película:</option></select>
+    </div><br>
+    <div class="span3 filtro">
+      <select class="form-control" disabled=""><option value="-1">Seleccione Formato:</option></select>
+    </div><br>
+    <div class="span3 filtro">
+      <select class="form-control" disabled=""><option value="-1">Seleccione el idioma:</option></select>
+    </div><br>
+    <div class="span3 filtro">
+      <select class="form-control" disabled=""><option value="-1">Seleccione Hora:</option></select>
+    </div>
+  </div>
+<br>
+<div class="row">
+        {% for funcion in funciones %}
+            <div class="card col-3" style="padding:10px">
+
+                <img class="card-img-top" src="{{funcion.pelicula.imagen.url}}" alt="Card image cap" height="400">
+                <div class="card-body">
+                    <h5 class="card-title">{{funcion.pelicula.nombre}}</h5>
+                    <p class="card-text">Horario: {{funcion.fecha}} {{funcion.hora}} </p>
+                    <p class="card-text">Formato: {{funcion.formato}} Lenguaje:{{funcion.lenguaje}}</p>
+                    <a href="{% url 'boleteria:funcion' funcion.id %}" class="btn btn-primary">Comprar</a>
+                </div>
+            </div>
+        {% empty %}
+          <h5>No hay funciones que presentar</h5>
+        {% endfor %}
+        </div>
+        <script src="/static/js/filtroCartelera.js" defer></script>
+{% endblock content %}
