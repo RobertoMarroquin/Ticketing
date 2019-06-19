@@ -1,0 +1,27 @@
+.envoltura{
+  border: 1px solid #e7e7e7;
+  background-color: #e9ecf0;
+  padding: 8px;
+  display: flex;
+  border-radius: 10px;
+}
+
+.filtro {
+  margin: 5px;
+  width: 20%;
+  display: inline;
+	}
+
+.form-control{
+  text-align: center;
+  cursor:pointer;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 1px rgba(102, 175, 233, 0.6);
+}
+
+.form-control:hover {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+  border-color: #66afe9;
+}

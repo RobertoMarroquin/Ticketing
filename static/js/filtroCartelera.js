@@ -118,7 +118,11 @@ function reestablecer(filtroFin){
     if (filtroFin===0){divCards[g].style.display="";}
     else{for (let k=0;k<filtroFin;k++){filtrosFunc[k];}}
   }
-  for (let f=filtrosTam-1;f>filtroFin;f--){
+  resetFiltros(filtroFin);
+}
+
+function resetFiltros(t){
+  for (let f=filtrosTam-1;f>t;f--){
     filtros[f].setAttribute("disabled","");
     filtros[f].querySelectorAll("option").forEach(function(x){if (x.value!=-1){x.parentNode.removeChild(x);}});
   }
@@ -131,7 +135,7 @@ let filtrosFunc=[
       if (filtros[0][opcionID].textContent!==horario){divCards[g].style.display="none";}
       else if (divCards[g].style.display!="none"){divCards[g].style.display="";}
       if(filtroFinal!=(filtrosTam-1))
-      {filtros[filtroFinal+1].removeAttribute("disabled");}
+      {resetFiltros(filtroFinal+1);filtros[filtroFinal+1].removeAttribute("disabled");}
     }if(filtroFinal!=(filtrosTam-1)){llenarOpciones[filtroFinal+1]()};
   },
   function(filtroFinal,opcionID){
@@ -140,7 +144,7 @@ let filtrosFunc=[
       if (filtros[1][opcionID].textContent!==nombrePeli){divCards[g].style.display="none";}
       else if (divCards[g].style.display!="none"){divCards[g].style.display="";}
       if(filtroFinal!=(filtrosTam-1))
-      {filtros[filtroFinal+1].removeAttribute("disabled");}
+      {resetFiltros(filtroFinal+1);filtros[filtroFinal+1].removeAttribute("disabled");}
     }if(filtroFinal!=(filtrosTam-1)){llenarOpciones[filtroFinal+1]()};
   },
   function(filtroFinal,opcionID){
@@ -149,7 +153,7 @@ let filtrosFunc=[
       if (filtros[2][opcionID].textContent!==formato){divCards[g].style.display="none";}
       else if (divCards[g].style.display!="none"){divCards[g].style.display="";}
       if(filtroFinal!=(filtrosTam-1))
-      {filtros[filtroFinal+1].removeAttribute("disabled");}
+      {resetFiltros(filtroFinal+1);filtros[filtroFinal+1].removeAttribute("disabled");}
     }if(filtroFinal!=(filtrosTam-1)){llenarOpciones[filtroFinal+1]()};
   },
   function(filtroFinal,opcionID){
@@ -158,7 +162,7 @@ let filtrosFunc=[
       if (filtros[3][opcionID].textContent!==idioma){divCards[g].style.display="none";}
       else if (divCards[g].style.display!="none"){divCards[g].style.display="";}
       if(filtroFinal!=(filtrosTam-1))
-      {filtros[filtroFinal+1].removeAttribute("disabled");}
+      {resetFiltros(filtroFinal+1);filtros[filtroFinal+1].removeAttribute("disabled");}
     }if(filtroFinal!=(filtrosTam-1)){llenarOpciones[filtroFinal+1]()};
   },
   function(filtroFinal,opcionID){
@@ -167,7 +171,7 @@ let filtrosFunc=[
       if (filtros[4][opcionID].textContent!==horas){divCards[g].style.display="none";}
       else if (divCards[g].style.display!="none"){divCards[g].style.display="";}
       if(filtroFinal!=(filtrosTam-1))
-      {filtros[filtroFinal+1].removeAttribute("disabled");}
+      {resetFiltros(filtroFinal+1);filtros[filtroFinal+1].removeAttribute("disabled");}
     }if(filtroFinal!=(filtrosTam-1)){llenarOpciones[filtroFinal+1]()};
   }
 ];

@@ -5,26 +5,24 @@
 {% endblock title %}
 
 {% block content %}
-
-<div class="container">
-  <div class="row-fluid">
-    <div class="span3">
-      <select class="form-control" style="cursor:pointer;"><option value="-1">Seleccione Fecha:</option></select>
+<link href="/static/css/filtro.css"  rel="stylesheet" >
+  <div class="row-fluid envoltura">
+    <div class="span3 filtro">
+      <select class="form-control"><option value="-1">Seleccione Fecha:</option></select>
     </div><br>
-    <div class="span3">
-       <select class="form-control" style="cursor:pointer;" disabled=""><option value="-1">Seleccione Película:</option></select>
+    <div class="span3 filtro">
+       <select class="form-control" disabled=""><option value="-1">Seleccione Película:</option></select>
     </div><br>
-    <div class="span3">
-      <select class="form-control" style="cursor:pointer;" disabled=""><option value="-1">Seleccione Formato:</option></select>
+    <div class="span3 filtro">
+      <select class="form-control" disabled=""><option value="-1">Seleccione Formato:</option></select>
     </div><br>
-    <div class="span3">
-      <select class="form-control" style="cursor:pointer;" disabled=""><option value="-1">Seleccione el idioma:</option></select>
+    <div class="span3 filtro">
+      <select class="form-control" disabled=""><option value="-1">Seleccione el idioma:</option></select>
     </div><br>
-    <div class="span3">
-      <select class="form-control" style="cursor:pointer;" disabled=""><option value="-1">Seleccione Hora:</option></select>
+    <div class="span3 filtro">
+      <select class="form-control" disabled=""><option value="-1">Seleccione Hora:</option></select>
     </div>
   </div>
-</div>
 <br>
 <div class="row">
         {% for funcion in funciones %}

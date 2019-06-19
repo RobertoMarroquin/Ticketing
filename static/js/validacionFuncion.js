@@ -14,14 +14,14 @@ function validar(wx){
   for (let u=0;u<tamCampos;u++){boletosTotales+=Number(camposBoleteria[u].value);}
   if (wxw%1!==0){
     wx.value=Math.floor(wxw);
-    tostada("¡No puedes comprar fracciones de boletos!","#f8d7da","#721c24",3000);
+    tostada("¡No puedes comprar fracciones de boletos!","#f8d7da","#721c24");
   }
   else if(wxw<0){
     wx.value=0;
-    tostada("¡No es posible adquirir boletos negativos!","#f8d7da","#721c24",3000);
+    tostada("¡No es posible adquirir boletos negativos!","#f8d7da","#721c24");
   }
   else if(boletosTotales>butacasDisponibles){
     wx.value-=(boletosTotales-butacasDisponibles);
-    tostada("¡Los boletos no pueden superar la cantidad de butacas disponibles!","#f8d7da","#721c24",3000);
+    tostada("¡No hay suficientes butacas disponibles!","#f8d7da","#721c24");
   }
 }
