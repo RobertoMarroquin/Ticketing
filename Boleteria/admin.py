@@ -7,17 +7,10 @@ class ModelButacas(admin.StackedInline):
     extra=0
 
 class ModelSalas(admin.ModelAdmin):
-    inlines=[modelButacas]
-
-class ModelPelicula(admin.StackedInline):
-    model=Pelicula
-    extra=0
-
-class ModelFuncion(admin.ModelAdmin):
-    inlines=[ModelPelicula]
+    inlines=[ModelButacas]
 
 # Register your models here.
 admin.site.register(Boleteria)
-admin.site.register(Pelicula,ModelFuncion)
+admin.site.register(Pelicula)
 admin.site.register(Funcion)
 admin.site.register(Sala,ModelSalas)
