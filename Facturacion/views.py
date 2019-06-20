@@ -26,6 +26,7 @@ def CarritoSession(request):
 def LineaVentaSession(request,tipoProducto,idProducto,cantidad):
     
     carrito = Carrito.objects.get(id=request.session['carrito'])
+    
     if tipoProducto =='b':
         boleto = Boleto.objects.get(id=idProducto)
         LineaVenta.objects.create(nombreProducto=boleto.tipo_cliente,

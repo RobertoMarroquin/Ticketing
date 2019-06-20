@@ -17,7 +17,6 @@ class Golosina(models.Model):
     nombre = models.CharField(blank=True, max_length=100)
     precio = models.DecimalField(max_digits=5, decimal_places=2)
     descripcion = models.TextField(blank=True)
-    caducidad = models.DateField(default=datetime.datetime.today)
     disponibilidad = models.BooleanField(default=True)
     dulceria = models.ForeignKey(Dulceria,on_delete= models.CASCADE)
 
@@ -45,4 +44,4 @@ class DetalleCombo(models.Model):
 
 
     def __str__(self):
-        return f"{self.combo.id}-{self.golosina.id}"
+        return f"{self.combo.id} - {self.golosina.id}"
