@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}   
+
+{% include 'carousel.html' %}
+
+<div class="container-pelicula">
+{% for pelicula in peliculas %}       
+        <div class="cartac">
+            <div class="carta">
+                <div class="lado frente">
+                    <img src="{{pelicula.imagen.url}}" alt="">
+                </div>
+                <div class="lado atras">
+                    <h4 class="card-title">{{pelicula.nombre}}</h4>
+                    <p>{{pelicula.duracion}}</p>
+                    <p>{{pelicula.clasificacion}}</p>
+                    <a href="{% url 'boleteria:funciones' pelicula.id %}" class="btn btn-primary btn-block" > ver funciones</a>
+                </div>
+            </div>
+        </div>
+{% endfor %}
+
+</div>
+{% endblock content %}
+    

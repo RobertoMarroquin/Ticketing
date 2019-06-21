@@ -1,0 +1,75 @@
+{% load static %}
+<!--Carousel-->
+<div class="container-fondo">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!--Elemento de Slider-->
+            <div class="swiper-slide">
+                <div class="imgBx"> 
+                    <img src="{% static 'media/promociones/01.jpg' %}"> <!--Establecer la imagen-->
+                </div>
+                <div class="details"><!--contenedor para los detalles-->
+                    <a href="#" class="btn btn-sm btn-block btn-danger">Añadir a carrito</a>
+                </div>
+            </div>
+            <!--termina Elemento de Slider-->
+
+            <div class="swiper-slide">
+                <div class="imgBx"> 
+                    <img src="{% static 'media/promociones/02.jpg' %}"> 
+                </div>
+                <div class="details">
+                    <a href="#" class="btn btn-sm btn-block btn-danger">Añadir a carrito</a>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="imgBx"> 
+                    <img src="{% static 'media/promociones/03.jpg' %}"> 
+                </div>
+                <div class="details">
+                    <a href="#" class="btn btn-sm btn-block btn-danger">Añadir a carrito</a>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="imgBx"> 
+                    <img src="{% static 'media/promociones/04.jpg' %}"> 
+                </div>
+                <div class="details">
+                    <a href="#" class="btn btn-sm btn-block btn-danger">Añadir a carrito</a>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="imgBx"> 
+                    <img src="{% static 'media/promociones/05.jpg' %}"> 
+                </div>
+                <div class="details">
+                    <a href="#" class="btn btn-sm btn-block btn-danger">Añadir a carrito</a>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="swiper-pagination"> </div>
+    </div>
+    </div>      
+
+    <script src="{% static 'js/swiper.min.js' %}"></script>
+    <script>
+    var swiper = new Swiper('.swiper-container', {
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        coverflowEffect: {
+        rotate: 0,
+        stretch: 00,
+        depth: 20,
+        modifier: 1,
+        slideShadows : true,
+        },
+        pagination: {
+        el: '.swiper-pagination',
+        },
+    });
+    </script>
+

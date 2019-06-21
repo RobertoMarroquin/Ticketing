@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     Cartelera
 {% endblock title %}
 
 {% block content %}
-<link href="/static/css/filtro.css"  rel="stylesheet" >
+<link href="{% static 'css/filtro.css' %}"  rel="stylesheet" >
   <div class="row-fluid envoltura">
     <div class="span3 filtro">
       <select class="form-control"><option value="-1">Seleccione Fecha:</option></select>
@@ -37,7 +38,7 @@
                 </div>
             </div>
         {% empty %}
-          <h5>No hay funciones que presentar</h5>
+          <h3 style="color: whitesmoke">Lo lamentamos, no se encontraron funciones que presentar</h3>
         {% endfor %}
         </div>
         <script src="/static/js/filtroCartelera.js" defer></script>

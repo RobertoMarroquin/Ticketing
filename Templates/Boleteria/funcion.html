@@ -4,14 +4,17 @@
     {{funcion.pelicula.nombre}}
 {% endblock title %}
 {% block content %}
-    {{funcion.pelicula.nombre}}
-    <div class="row">
-        <div class="col-3">
+    <div class="container-fluid bg-dark" style="color: white">
+        <h3>{{funcion.pelicula.nombre}}</h3>
+        <div class="row">
+        <div class="col-4">
             <img src="{{funcion.pelicula.imagen.url}}" class="img-fluid " height=600 width="400" alt="">
         </div>
-        <div class="col-9">
-            <p>Pais : {{funcion.pelicula.pais}} Ano : {{funcion.pelicula.anyo}}</p>
+        <div class="col-8">
             <p>Sinopsis : {{funcion.pelicula.sinopsis}}</p>
+            <p>Pais : {{funcion.pelicula.pais}}</p>
+            <p>Año : {{funcion.pelicula.anyo}}</p>
+            
             <form method="POST">
                 {% csrf_token %}
                     <br>
@@ -48,10 +51,9 @@
 
         </div>
     </div>
+</div>
 
 
-<div class="container">
-            </div>
 <script type="text/javascript" defer>
 
 </script>

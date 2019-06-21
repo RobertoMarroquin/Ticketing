@@ -25,6 +25,7 @@ class Pelicula(models.Model):
     genero = models.CharField(blank=True, max_length=100)
     imagen = models.ImageField(upload_to="Peliculas",blank=True, null=True)
     boleteria = models.ForeignKey(Boleteria,on_delete=models.CASCADE)
+    exhibicion = models.CharField(("En Exhibicion"),choices = [("exh","En Exhibicion"),("prx","Proximamente"),("ina","Inactiva")], max_length=50)
 
     def __str__(self):
         return self.nombre
@@ -50,7 +51,7 @@ class Funcion(models.Model):
     hora = models.TimeField(blank=True)
     fecha = models.DateField(default=datetime.datetime.today)
     lenguaje = models.CharField(blank=True, max_length=100)
-    formato = models.CharField(blank=True, max_length=100)
+    formato = models.CharField(choices=[('2D','2D'),('3D','3D'),('XD','XD')],blank=True, max_length=100)
     estado = models.BooleanField(default=True)
     pelicula = models.ForeignKey(Pelicula, on_delete=models.CASCADE)
     sala = models.ForeignKey(Sala, on_delete=models.CASCADE)

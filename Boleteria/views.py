@@ -16,6 +16,11 @@ from Facturacion.views import CarritoSession,LineaVentaSession
 from Facturacion.models import LineaVenta,Carrito
 # Create your views here.
 
+
+def home(request):
+    peliculas = Pelicula.objects.filter(exhibicion="exh")
+    return render(request,'home.html',{'peliculas':peliculas})
+
 class PeliculaView(View):
     def get(self, request, peli):
         try:
@@ -24,17 +29,13 @@ class PeliculaView(View):
         except ObjectDoesNotExist:
             raise Http404("No se han encontrado Peliculas")
         
-        cotext = {"pelicula":pelicula,
-            "funciones":funciones
+        context = { "pelicula":pelicula,
+                    "funciones":funciones
         }
-        return render(request,"Boleteria/funcion.html",context)
+        return render(request,"Boleteria/cartelera.html",context)
 
     def post(self, request):
-        adultos = int(request.POST['adultos'])
-        ninos = int(request.POST['ninos'])
-        terceraEdad = int(request.POST["terceraEdad"])
-        estudiantes = int(request.POST["estudiantes"])
-        funcion = request.POST["funcion"]
+       
         return HttpResponse('POST request!')
 
 class FuncionList(ListView):

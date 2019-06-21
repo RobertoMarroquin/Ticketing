@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Carrito,Cliente,TarjetaCredito,LineaVenta
 from Boleteria.models import Boleto
 from Dulceria.models import Combo, Golosina
+from django.views import View
 
 
 import uuid
@@ -55,4 +56,17 @@ def LineaVentaSession(request,tipoProducto,idProducto,cantidad):
                                     precio=golosina.precio,
                                     subtotal=cantidad * golosina.precio,
                                     carrito=carrito)
+
+class CarritoDetalle(View):
+    def get(self, request):
+        carrito = Carrito.objects.get(id=int(request.session['carrito']))
+        lineasVentas = LineaVenta.objects.filter(carrito=carrito)
+        context = {}
+        context['lineasVentas'] = lineasVentas
+        context['carrito'] = carrito
+        return HttpResponse('GET request!')
+
+    def post(self, request, *args, **kwargs):
+        return HttpResponse('POST request!')
+
 
