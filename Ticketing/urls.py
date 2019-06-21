@@ -17,9 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from Ticketing.views import adminSalas,adminDetalleSala, adminCrearSala, adminEditarSala
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cine/', include(('Boleteria.urls',"Boleteria"),namespace="boleteria")),
+    path('adminSalas/',adminSalas,name="adminSalas"),
+    path('adminSalas/<int:sala_id>/',adminDetalleSala,name="adminDetalleSala"),
+    path('adminSalas/crearSala/',adminCrearSala,name="adminCrearSala"),
+    path('adminSalas/editarSala/<int:sala_id>/',adminEditarSala,name="adminEditarSala"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,8 @@
+{% extends "administrador/adminBase.html" %}
+{% block tittle %}Crear nueva sala{% endblock %}
+{% block content %}
+  <form action="" method="post">{% csrf_token %}
+    {% include "administrador/adminFormTemplate.html" %}
+    <input type="submit" value="Guardar">
+  </form>
+{% endblock %}

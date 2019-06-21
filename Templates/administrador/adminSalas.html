@@ -1,0 +1,9 @@
+{% extends "administrador/adminBase.html" %}
+{% block tittle %}Administración de salas{% endblock %}
+{% block content %}
+<p><h2>Administración de salas</h2></p><br />
+<p><a href="{% url 'adminCrearSala' %}">Crear sala</a></p><br>
+  {% for sala in salas %}
+  <a href="{% url "adminDetalleSala" sala.id %}">{{sala.nombre}}</a><br>
+  {% endfor %}
+{% endblock %}

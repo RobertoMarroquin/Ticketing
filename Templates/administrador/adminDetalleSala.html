@@ -1,0 +1,12 @@
+{% extends "administrador/adminBase.html" %}
+{% block tittle %}Detalle de sala{% endblock %}
+{% block content %}
+  <br><p><b>Sala: {{sala.nombre}}</b> - <a href="{% url 'adminEditarSala' sala.id %}">Editar sala</a></p>
+  <p>Número de sala: {{sala.numero_sala}}</p>
+  <p>Filas: {{sala.numero_filas}}</p>
+  <p>Columnas: {{sala.numero_columnas}}</p>
+  <p>Número de asientos: {{sala.numero_asientos}}</p>
+  <p>Clase: {{sala.clase}}</p>
+  <p>Boleteria: {{sala.boleteria}}</p>
+  <br><p><a href="{% url "adminSalas" %}">Regresar</a></p>
+{% endblock %}
