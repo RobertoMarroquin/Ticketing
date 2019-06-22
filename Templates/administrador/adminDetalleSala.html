@@ -1,12 +1,68 @@
 {% extends "administrador/adminBase.html" %}
 {% block tittle %}Detalle de sala{% endblock %}
 {% block content %}
-  <br><p><b>Sala: {{sala.nombre}}</b> - <a href="{% url 'adminEditarSala' sala.id %}">Editar sala</a></p>
-  <p>Número de sala: {{sala.numero_sala}}</p>
-  <p>Filas: {{sala.numero_filas}}</p>
-  <p>Columnas: {{sala.numero_columnas}}</p>
-  <p>Número de asientos: {{sala.numero_asientos}}</p>
-  <p>Clase: {{sala.clase}}</p>
-  <p>Boleteria: {{sala.boleteria}}</p>
-  <br><p><a href="{% url "adminSalas" %}">Regresar</a></p>
+  <div class="row">
+    <div class="col-md-auto text-center"><h2>Detalle de sala</h2></div>
+  </div>
+  <br><br>
+  <p class="font-weight-bold" id="sala">Sala: {{sala.nombre}}</p>
+  <p id="numeroSala">Número de sala: {{sala.numero_sala}}</p>
+  <p id="filas">Filas: {{sala.numero_filas}}</p>
+  <p id="columnas">Columnas: {{sala.numero_columnas}}</p>
+  <p id="numeroAsientos">Número de asientos: {{sala.numero_asientos}}</p>
+  <p id="clase">Clase: {{sala.clase}}</p>
+  <p id="boleteria">Boleteria: {{sala.boleteria}}</p>
+  <br>
+  <a href="{% url 'adminEditarSala' sala.id %}" class="btn btn-primary"><span class="fas fa-edit"></span> Editar</a>
+  <a href="{% url "adminSalas" %}" class="btn btn-primary"><span class="fas fa-undo"></span> Regresar</a>
+    {% csrf_token %}
+    <button type="buttom" class="btn btn-danger" style="margin-left:30px" id="eliminarSala">
+      <span class="fa fa-trash"></span> Eliminar</a>
+    </button>
+
+  <script type="text/javascript">
+    let botonEliminar=document.getElementById("eliminarSala");
+    botonEliminar.addEventListener("click",function(){
+      bootbox.confirm({
+        centerVertical:"True",
+        title: "Confirmación",
+        message: "¿Estás seguro que deseas eliminar ésta sala del cine {{sala.boleteria}}?",
+        buttons: {
+            cancel: {label: '<i class="fa fa-times"></i> Cancelar'},
+            confirm: {label: '<i class="fa fa-check"></i> Confirmar'}
+        },
+        callback: function (result) {
+            if (result){
+              let token = $('input[name=csrfmiddlewaretoken]').val();
+              let data = document.getElementById("sala").value;
+
+              $.ajax({
+                url: "{%url "adminEliminarSala" %}",
+                type: "POST",
+                data : {
+                  csrfmiddlewaretoken: token,
+                  mensaje: {{sala.id}},
+                },
+                //dataType: "json",
+                success: function (msg) {
+                  let mensaje;
+                  switch (msg){
+                    case "1":mensaje="¡Sala eliminada con éxito!";break;
+                    case "0":mensaje="¡No ha sido posible eliminar la sala!";break;
+                    case "-1":mensaje="¡Sala no encontrada para eliminar!";break;
+                  }
+                  bootbox.alert({
+                     size: "small",
+                     centerVertical:"True",
+                     message: mensaje,
+                     callback: function(){if (msg=="1")window.location.href={% url "adminSalas" %};}
+                 })
+                },
+                error: function (msg, textStatus, errorThrown) {alert("fail");}
+              });
+            }
+          }
+      });
+    });
+  </script>
 {% endblock %}

@@ -1,8 +1,8 @@
 {% extends "administrador/adminBase.html" %}
-{% block tittle %}Crear nueva sala{% endblock %}
+{% block tittle %}Editar sala{% endblock %}
 {% block content %}
   <div class="row">
-    <div class="col-md-auto text-center"><h2>Crear nueva sala</h2></div>
+    <div class="col-md-auto text-center"><h2>Edición de sala "{{form.nombre.value}}"</h2></div>
   </div>
   <br><br>
   <form action="" method="post">{% csrf_token %}
