@@ -1,6 +1,8 @@
 from django.db import models
 
 import datetime
+
+from Facturacion.models import Carrito,LineaVenta
 # Create your models here.
 
 class Boleteria(models.Model):
@@ -81,3 +83,23 @@ class Butaca(models.Model):
 
     def __str__(self):
         return f"{self.fila}{self.numero_asiento}"
+
+class RegistroBoletos(models.Model):
+    """En esta clase se guarda la relacion entre la linea de venta, el boleto, la butaca y la funcion ."""
+
+    boleto = models.ForeignKey(Boleto, on_delete=models.CASCADE)
+    funcion = models.ForeignKey(Funcion, on_delete=models.CASCADE)
+    butaca = models.ForeignKey(Butaca, on_delete=models.CASCADE)
+    lineaVenta = models.ForeignKey(LineaVenta, on_delete=models.CASCADE)
+
+
+    
+    class Meta:
+        """Meta definition for RegistroBoletos."""
+
+        verbose_name = 'RegistroBoletos'
+        verbose_name_plural = 'RegistroBoletoss'
+
+    def __str__(self):
+        """Unicode representation of RegistroBoletos."""
+        return f'Boleto {self.boleto.tipo_cliente}  Butaca:{self.butaca.fila}{self.butaca.numero}'
