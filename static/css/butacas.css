@@ -1,0 +1,32 @@
+.butacaTD{
+  width:100%;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+  font-size:11px;
+  margin: 1px;
+  padding: 0;
+  border-spacing: 0;
+}
+
+.containerF {
+  position: relative;
+  text-align: center;
+  color: black;
+  font-size:14px;
+  margin: 1px;
+  padding: 0;
+  border-spacing: 0;
+  margin-right: 9px;
+  margin-left: 9px;
+}
+
+.numero {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

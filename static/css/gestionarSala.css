@@ -1,0 +1,25 @@
+.card-header{
+  cursor:pointer;
+}
+
+.tablaButacas{
+
+}
+
+.butacaTD{
+  opacity:1;
+  cursor: pointer;
+}
+
+.butacaTD:hover{
+  opacity: 0.7;
+}
+
+.caminoTD{
+  opacity:0;
+  cursor: pointer;
+}
+
+.caminoTD:hover{
+  opacity: 1;
+}
