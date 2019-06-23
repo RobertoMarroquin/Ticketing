@@ -1,0 +1,22 @@
+{% extends "administrador/adminBase.html" %}
+{% block tittle %}Inicio de sesión{% endblock %}
+{% block content %}
+  <h1>Inicio de sesión</h1>
+  <br><br>
+  <div class="container">
+    {% if message %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <b>{{message}}</b>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endif %}
+    <br>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{form.as_p}}
+      <input type="submit" value="Ingresar">
+    </form>
+  </div>
+{% endblock %}

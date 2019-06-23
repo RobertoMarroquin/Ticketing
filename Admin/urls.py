@@ -26,4 +26,6 @@ urlpatterns = [
     path('upd/',adminActualizarSala,name="adminActualizarSala"),
     path('btcs/',darButacas,name="darButacas"),
     path('peekar/<int:id>/',peekar,name="peekar"),
+    path('login/',login_page,name="login_page"),
+    path('logout/',logout_view,name="logout_view"),
 ]

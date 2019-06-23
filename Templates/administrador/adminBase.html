@@ -19,6 +19,13 @@
     <div id="snackbar"></div>
     <!--cabecera-->
     <div class="container">
+      <div class="header text-right">
+        {% if user.is_authenticated %}
+          <p>Bienvenido/a, <b>{{user.username}} | <a href="{% url "logout_view" %}">Salir</a></b></p>
+        {% else %}
+          <p>Bienvenido. Por favor <a href="{% url "login_page" %}">Inicia sesión</a></p>
+        {% endif %}
+      </div>
       <div class="row text-center"><h1><u>Ticketing System</u></h1></div>
       {% block content %}{% endblock %}
     </div>
