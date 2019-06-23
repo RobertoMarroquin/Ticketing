@@ -22,28 +22,57 @@ function letraNumero(letra){return letra.charCodeAt(0)-65;}
 function artista(){
   for (let i=0;i<filas;i++){
     let filaTr=document.createElement("tr");
-    let letraFila=numeroLetra(i);
-    filaTr.setAttribute("id",letraFila);
-    tablaButacas.appendChild(filaTr);
+    let headerFila=document.createElement("td");
+    let letraFila="";
+    let flagFila=0;
+
+    let hFContainer=document.createElement("div");
+    hFContainer.setAttribute("class","containerF");
+    headerFila.appendChild(hFContainer);
+    filaTr.appendChild(headerFila);
 
     for (let j=0;j<columnas;j++){
+      let divContenedor=document.createElement("div");
+      divContenedor.setAttribute("class","container");
+
+      /////buscando si hay alguna butaca en la fila y si hay, se asigna la letra
+      if (salaButacas[i*columnas+j].fields.fila!="-"&&flagFila==0){
+        letraFila=salaButacas[i*columnas+j].fields.fila;
+        flagFila=1;
+      }
       let butacaIcon=document.createElement("img");
+      let nAsiento=salaButacas[i*columnas+j].fields.numero_asiento;
 
       if (salaButacas[i*columnas+j].fields.clase){
         butacaIcon.setAttribute("src","/static/Media/ButacasGrid/butacaEditor.png");
         butacaIcon.setAttribute("class","butacaTD");
         butacaIcon.setAttribute("clase",true);
+        butacaIcon.setAttribute("id",nAsiento);
       }else{
-        butacaIcon.setAttribute("src","/static/Media/ButacasGrid/caminoEditor.png");
+        butacaIcon.setAttribute("src","/static/Media/ButacasGrid/transparente.png");
         butacaIcon.setAttribute("class","caminoTD");
         butacaIcon.setAttribute("clase",false);
+        butacaIcon.setAttribute("id",0);
       }
-      butacaIcon.setAttribute("id",j+1);
-      butacaIcon.setAttribute("title",j+1);
-      butacaIcon.addEventListener("click",ev=>clickear(ev));
+
       let datoTd=document.createElement("td");
-      datoTd.appendChild(butacaIcon);
+      divContenedor.appendChild(butacaIcon);
+
+      if (nAsiento!=0){
+        let numeroA=document.createElement("div");
+        numeroA.setAttribute("class","numero");
+        numeroA.textContent=nAsiento;
+        divContenedor.appendChild(numeroA);
+      }
+      datoTd.appendChild(divContenedor);
       filaTr.appendChild(datoTd);
     }
+    let fCon=document.createElement("div");
+    fCon.setAttribute("class","letra");
+    hFContainer.appendChild(fCon);
+    filaTr.setAttribute("id",letraFila);
+    fCon.textContent=letraFila;
+    filaTr.appendChild(headerFila.cloneNode(true));
+    tablaButacas.appendChild(filaTr);
   }
 }
