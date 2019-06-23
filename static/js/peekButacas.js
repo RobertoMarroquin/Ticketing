@@ -11,7 +11,8 @@ $.ajax({
   },
   success: function(smg){
     salaButacas=JSON.parse(smg);
-    artista();
+    if (salaButacas!=""){artista();}
+    else {tostada("Ésta sala no dispone de butacas en la base de datos, favor actualizarla","#f8d7da","#721c24",6000);}
   },
   error: function (msg, textStatus, errorThrown) {alert("fail");console.log(msg);console.log(textStatus);console.log(errorThrown);}
 });

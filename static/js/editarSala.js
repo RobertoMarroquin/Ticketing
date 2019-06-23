@@ -24,7 +24,8 @@ $.ajax({
   },
   success: function(smg){
     salaButacas=JSON.parse(smg);
-    artista(0,"E");
+    if (salaButacas==""){artista();}
+    else{artista(0,"E");}
   },
   error: function (msg, textStatus, errorThrown) {alert("fail");console.log(msg);console.log(textStatus);console.log(errorThrown);}
 });

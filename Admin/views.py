@@ -34,17 +34,16 @@ def darButacas(request):
 def adminActualizarSala(request):
     sala_JSON=json.loads(request.POST['mensaje1'])
     butacas_JSON=json.loads(request.POST['mensaje2'])
-    Sala.objects.get(pk=request.POST['mensaje3']).delete()
+    s=Sala.objects.get(pk=request.POST['mensaje3'])
+    Butaca.objects.filter(Sala=s).delete()
 
-    s=Sala(
-           nombre=sala_JSON["nombre"],
-           numero_sala=sala_JSON["numero_sala"],
-           numero_asientos=sala_JSON["numero_asientos"],
-           numero_filas=sala_JSON["numero_filas"],
-           numero_columnas=sala_JSON["numero_columnas"],
-           clase=sala_JSON["clase"],
-           boleteria=Boleteria.objects.get(pk=sala_JSON["boleteria"])
-           )
+    s.nombre=sala_JSON["nombre"]
+    s.numero_sala=sala_JSON["numero_sala"]
+    s.numero_asientos=sala_JSON["numero_asientos"]
+    s.numero_filas=sala_JSON["numero_filas"]
+    s.numero_columnas=sala_JSON["numero_columnas"]
+    s.clase=sala_JSON["clase"]
+    s.boleteria=Boleteria.objects.get(pk=sala_JSON["boleteria"])
     s.save()
 
     for w in butacas_JSON:
