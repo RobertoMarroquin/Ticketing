@@ -1,8 +1,0 @@
-{% for field in form  %}
-  {% if field.name != "numero_asientos" %}
-    <div class="field_container">
-      {{field.errors}}
-      <p>{{field.label_tag}} {{field}}</p>
-    </div>
-  {% endif %}
-{% endfor %}

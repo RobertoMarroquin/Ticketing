@@ -1,7 +1,12 @@
 {% extends "administrador/adminBase.html" %}
 {% block tittle %}Administración de salas{% endblock %}
 {% block content %}
-<link href="/static/css/adminCaja.css" rel="stylesheet">
+<style>
+  .box{
+    margin: 10px 0 10px 0;
+  }
+</style>
+
 <div class="row">
   <div class="col-md-auto text-center"><h2>Administración de salas</h2></div>
   <div class="col-md-auto text-center"><a href="{% url 'adminCrearSala' %}" class="btn btn-primary"><span class="fas fa-ticket-alt"></span> Crear sala</a></div>

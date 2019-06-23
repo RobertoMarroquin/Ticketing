@@ -20,7 +20,7 @@
       <span class="fa fa-trash"></span> Eliminar</a>
     </button>
 
-  <script type="text/javascript">
+  <script type="text/javascript" defer>
     let botonEliminar=document.getElementById("eliminarSala");
     botonEliminar.addEventListener("click",function(){
       bootbox.confirm({
@@ -34,8 +34,6 @@
         callback: function (result) {
             if (result){
               let token = $('input[name=csrfmiddlewaretoken]').val();
-              let data = document.getElementById("sala").value;
-
               $.ajax({
                 url: "{%url "adminEliminarSala" %}",
                 type: "POST",
@@ -54,6 +52,7 @@
                   bootbox.alert({
                      size: "small",
                      centerVertical:"True",
+                     tittle: "Confirmación",
                      message: mensaje,
                      callback: function(){if (msg=="1")window.location.href={% url "adminSalas" %};}
                  })

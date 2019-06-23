@@ -6,8 +6,29 @@
   </div>
   <br><br>
   <form action="" method="post">{% csrf_token %}
-    {% include "administrador/adminFormTemplate.html" %}
+
+    {{ form.subject.errors }}
+    <p><label for="{{ form.numero_sala.id_for_label }}">Numero de sala:</label> {{ form.numero_sala }}</p>
+    {{ form.subject.errors }}
+    <p><label for="{{ form.clase.id_for_label }}">Clase de sala:</label> {{ form.clase }}</p>
+
     <button type="submit" class="btn btn-success"><span class="fas fa-save"></span> Guardar</button>
-    <a href="{% url "adminSalas" %}" class="btn btn-primary" style="margin-left:50px"><span class="fas fa-undo"></span> Regresar</a>
+    <button type="button" id="botonVolver" class="btn btn-primary" style="margin-left:50px"><span class="fas fa-undo"></span> Regresar</button>
   </form>
+
+  <script type="text/javascript">
+    botonVolver=document.getElementById("botonVolver");
+    botonVolver.addEventListener("click",function(){
+      bootbox.confirm({
+        centerVertical:"True",
+        title: "Confirmación",
+        message: "¿Está seguro de salir y descartar los cambios realizados?",
+        buttons: {
+            cancel: {label: '<i class="fa fa-times"></i> Cancelar'},
+            confirm: {label: '<i class="fa fa-check"></i> Confirmar'}
+        },
+        callback: function (result) {if (result) window.location.href={% url "adminSalas" %};}
+      });
+    });
+  </script>
 {% endblock %}

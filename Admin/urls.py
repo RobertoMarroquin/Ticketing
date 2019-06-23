@@ -22,5 +22,5 @@ urlpatterns = [
     path('crearSala/',adminCrearSala,name="adminCrearSala"),
     path('editarSala/<int:sala_id>/',adminEditarSala,name="adminEditarSala"),
     path('ded/',adminEliminarSala,name="adminEliminarSala"),
-    path('lel/',prueba,name="prueba"),
+    path('born/',adminGuardarNuevaSala,name="adminGuardarNuevaSala"),
 ]
