@@ -16,15 +16,20 @@
         <div class="tagtexto">Golosinas</div>
         <div class="seccion">
                 <!--Aqui va el for de cada golosina de la dulceria-->
-                <div class="golosina-detalle">
-                    <div class="golosina-img">
-                        <img src="img/combo1.jpg" alt="">
+                
+                {% for golosina in golosinas %}
+                    <div class="golosina-detalle">
+                        <div class="golosina-img">
+                            <img src="" alt="">
+                        </div>
+                        <div class="g-detalle-item">{{golosina.nombre}}</div>
+                        <div class="g-detalle-item">$ {{golosina.precio}}</div>
+                        <!--escribir en lugar de funcion() el nombre de la funcion que se activa al hacer click-->
+                        <a href="{% url 'dulceria:dulce' golosina.id %}" class="btn btn-primary">Comprar</a>
                     </div>
-                    <div class="g-detalle-item">{{Nombre de golosina}}</div>
-                    <div class="g-detalle-item">$ {{99.99}}</div>
-                    <!--escribir en lugar de funcion() el nombre de la funcion que se activa al hacer click-->
-                    <div class="g-detalle-item boton" onclick="funcion()">añadir a carrito</div>
-                </div>
+                {% empty %}
+                      
+                {% endfor %}
                 <!--Aqui termina el for de cada golosina de la dulceria-->
         </div>
         <div class="tagtexto">Combos</div>
