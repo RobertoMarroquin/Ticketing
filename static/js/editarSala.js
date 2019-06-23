@@ -3,15 +3,31 @@ const filasOp=document.getElementById("id_numero_filas");
 const columnasOp=document.getElementById("id_numero_columnas");
 const numeroSalaOp=document.getElementById("id_numero_sala");
 
-filasOp.value="";
-columnasOp.value="";
-numeroSalaOp.value="";
-
 let lastValuerF=0;
 let lastValuerC=0;
-let filas=0;
-let columnas=0;
-let bandera=true;//true==primer vez o ceroF ceroC
+let filas=lastValuerF=filasOp.value;
+let columnas=lastValuerC=columnasOp.value;
+let bandera=false;//true==primer vez o ceroF ceroC
+let salaButacas;
+let token = $('input[name=csrfmiddlewaretoken]').val();
+
+//////////////////////////////////////////////////////////////////////////
+//PETICIÓN DE BUTACAS DE LA SALA
+//////////////////////////////////////////////////////////////////////////
+
+$.ajax({
+  url: p,
+  type: "POST",
+  data : {
+    csrfmiddlewaretoken: token,
+    mensaje1:salaID,
+  },
+  success: function(smg){
+    salaButacas=JSON.parse(smg);
+    artista(0,"E");
+  },
+  error: function (msg, textStatus, errorThrown) {alert("fail");console.log(msg);console.log(textStatus);console.log(errorThrown);}
+});
 
 //////////////////////////////////////////////////////////////////////////
 //ASIGNACIÓN DE EVENTOS
@@ -135,6 +151,35 @@ function  artista(diferencia,filaOcol){
       }else{
         diferencia=Math.abs(diferencia);
         for (let r=0;r<diferencia;r++){tablaButacas.removeChild(tablaButacas.lastChild);}
+      }
+    }break;
+
+    case "E":{
+      for (let i=0;i<filas;i++){
+        let filaTr=document.createElement("tr");
+        let letraFila=numeroLetra(i);
+        filaTr.setAttribute("id",letraFila);
+        tablaButacas.appendChild(filaTr);
+
+        for (let j=0;j<columnas;j++){
+          let butacaIcon=document.createElement("img");
+
+          if (salaButacas[i*columnas+j].fields.clase){
+            butacaIcon.setAttribute("src","/static/Media/ButacasGrid/butacaEditor.png");
+            butacaIcon.setAttribute("class","butacaTD");
+            butacaIcon.setAttribute("clase",true);
+          }else{
+            butacaIcon.setAttribute("src","/static/Media/ButacasGrid/caminoEditor.png");
+            butacaIcon.setAttribute("class","caminoTD");
+            butacaIcon.setAttribute("clase",false);
+          }
+          butacaIcon.setAttribute("id",j+1);
+          butacaIcon.setAttribute("title",j+1);
+          butacaIcon.addEventListener("click",ev=>clickear(ev));
+          let datoTd=document.createElement("td");
+          datoTd.appendChild(butacaIcon);
+          filaTr.appendChild(datoTd);
+        }
       }
     }break;
 
@@ -277,6 +322,7 @@ function guardarSala(){
         csrfmiddlewaretoken: token,
         mensaje1:mensaje1,
         mensaje2:mensaje2,
+        mensaje3:salaID,
       },
       success: function (msg) {
         bootbox.hideAll();

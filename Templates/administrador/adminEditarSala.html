@@ -1,22 +1,66 @@
 {% extends "administrador/adminBase.html" %}
 {% block tittle %}Editar sala{% endblock %}
 {% block content %}
+  <link href="/static/css/gestionarSala.css"  rel="stylesheet" >
+  <script type=text/javascript>let a = "{% url "adminActualizarSala" %}" </script>
+  <script type=text/javascript>let p = "{% url "darButacas" %}" </script>
+  <script type=text/javascript>let r = "{% url "adminSalas" %}" </script>
+  <script type=text/javascript>let salaID = "{{ id }}" </script>
+
   <div class="row">
     <div class="col-md-auto text-center"><h2>Edición de sala "{{form.nombre.value}}"</h2></div>
   </div>
   <br><br>
-  <form action="" method="post">{% csrf_token %}
 
-    {{ form.subject.errors }}
-    <p><label for="{{ form.numero_sala.id_for_label }}">Numero de sala:</label> {{ form.numero_sala }}</p>
-    {{ form.subject.errors }}
-    <p><label for="{{ form.clase.id_for_label }}">Clase de sala:</label> {{ form.clase }}</p>
+  {% csrf_token %}
+  <div id="accordion">
+    <div class="card border-light">
+      <div class="card-header" id="salaCard" data-toggle="collapse" data-target="#salaC" aria-expanded="true" aria-controls="salaC">
+        <h5>Sala</h5>
+      </div>
+      <div id="salaC" class="collapse show" aria-labelledby="salaCard" data-parent="#accordion">
+        <div class="card-body">
 
-    <button type="submit" class="btn btn-success"><span class="fas fa-save"></span> Guardar</button>
-    <button type="button" id="botonVolver" class="btn btn-primary" style="margin-left:50px"><span class="fas fa-undo"></span> Regresar</button>
-  </form>
+          {{ form.numero_sala.errors }}
+          <p><label for="{{ form.nombre.id_for_label }}">Nombre de sala: </label> {{ form.nombre }}</p>
+          {{ form.numero_sala.errors }}
+          <p><label class="fieldNumero" for="{{ form.numero_sala.id_for_label }}">Numero de sala: </label> {{ form.numero_sala }}</p>
+          {{ form.clase.errors }}
+          <p><label for="{{ form.clase.id_for_label }}">Clase de sala: </label> {{ form.clase }}</p>
+          {{ form.boleteria.errors }}
+          <p><label for="{{ form.boleteria.id_for_label }}">Boleteria: </label> {{ form.boleteria }}</p>
 
-  <script type="text/javascript">
+          <button id="postGuardar" type="button" class="btn btn-success"><span class="fas fa-save"></span> Guardar</button>
+          <button type="button" id="botonVolver" class="btn btn-primary" style="margin-left:50px"><span class="fas fa-undo"></span> Regresar</button>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card border-light">
+      <div class="card-header" id="butacaCard" data-toggle="collapse" data-target="#butacaC" aria-expanded="true" aria-controls="butacaC">
+        <h5>Butacas</h5>
+      </div>
+      <div id="butacaC" class="collapse" aria-labelledby="butacaCard" data-parent="#accordion">
+        <div class="card-body">
+
+          <center>
+          {{ form.numero_filas.errors }}
+          <label class="fieldNumero" for="{{ form.numero_filas.id_for_label }}">Filas: </label> {{ form.numero_filas }}
+          {{ form.numero_columnas.errors }}
+          <label class="fieldNumero" for="{{ form.numero_columnas.id_for_label }}" style="margin-left:10px">Columnas: </label> {{ form.numero_columnas }}
+          <br><br>
+          <img src="/static/Media/ButacasGrid/pantalla.png"/>
+          <br><br><br>
+          <table id="tablaButacas" class="tablaButacas"></table>
+          </center>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" defer>
     botonVolver=document.getElementById("botonVolver");
     botonVolver.addEventListener("click",function(){
       bootbox.confirm({
@@ -27,8 +71,9 @@
             cancel: {label: '<i class="fa fa-times"></i> Cancelar'},
             confirm: {label: '<i class="fa fa-check"></i> Confirmar'}
         },
-        callback: function (result) {if (result) window.location.href={% url "adminSalas" %};}
+        callback: function (result) {if (result) window.location.href=r;}
       });
     });
   </script>
+  <script src="/static/js/editarSala.js" charset="utf-8" defer></script>
 {% endblock %}

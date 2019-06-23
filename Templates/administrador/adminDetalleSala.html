@@ -1,11 +1,14 @@
 {% extends "administrador/adminBase.html" %}
 {% block tittle %}Detalle de sala{% endblock %}
 {% block content %}
+<script type=text/javascript>let peekar = "{% url "peekar" sala.id %}" </script>
   <div class="row">
     <div class="col-md-auto text-center"><h2>Detalle de sala</h2></div>
   </div>
   <br><br>
-  <p class="font-weight-bold" id="sala">Sala: {{sala.nombre}}</p>
+  <p class="font-weight-bold align-middle" id="sala">Sala: {{sala.nombre}}
+    <button id="peekar" type="button" class="far fa-eye btn btn-outline-secondary"></button>
+  </p>
   <p id="numeroSala">Número de sala: {{sala.numero_sala}}</p>
   <p id="filas">Filas: {{sala.numero_filas}}</p>
   <p id="columnas">Columnas: {{sala.numero_columnas}}</p>
@@ -21,6 +24,11 @@
     </button>
 
   <script type="text/javascript" defer>
+    let botonPeek=document.getElementById("peekar");
+    botonPeek.addEventListener("click",function(){
+      window.open(peekar,"","width=640,height=480","status=0","toolbar=0","menubar=0","location=0");
+    });
+
     let botonEliminar=document.getElementById("eliminarSala");
     botonEliminar.addEventListener("click",function(){
       bootbox.confirm({
