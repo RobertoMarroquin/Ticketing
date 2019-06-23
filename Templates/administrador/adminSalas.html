@@ -1,0 +1,28 @@
+{% extends "administrador/adminBase.html" %}
+{% block tittle %}Administración de salas{% endblock %}
+{% block content %}
+<style>
+  .box{
+    margin: 10px 0 10px 0;
+  }
+</style>
+
+<div class="row">
+  <div class="col-md-auto text-center"><h2>Administración de salas</h2></div>
+  <div class="col-md-auto text-center"><a href="{% url 'adminCrearSala' %}" class="btn btn-primary"><span class="fas fa-ticket-alt"></span> Crear sala</a></div>
+</div>
+<br><br>
+{% for boleteria in boleterias %}
+  <div class="row"><div class="col-md-auto box"><span class="align-middle">{{boleteria.nombre}}</span></div>
+    {% for sala in boleteria.sala_set.all %}
+      <div class="col-md-auto box">
+        <a href="{% url "adminDetalleSala" sala.id %}" class="btn btn-outline-primary col">{{sala.nombre}}</a>
+      </div>
+      {% empty %}
+        <div class="col-md-auto box">
+          <span class="alert alert-secondary">No hay salas disponibles para ésta boletería</span>
+        </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+{% endblock %}
