@@ -17,15 +17,16 @@ from django.urls import path, include
 from Admin.views import *
 
 urlpatterns = [
-    path('',adminSalas,name="adminSalas"),
-    path('<int:sala_id>/',adminDetalleSala,name="adminDetalleSala"),
-    path('crearSala/',adminCrearSala,name="adminCrearSala"),
-    path('editarSala/<int:sala_id>/',adminEditarSala,name="adminEditarSala"),
-    path('ded/',adminEliminarSala,name="adminEliminarSala"),
-    path('born/',adminGuardarNuevaSala,name="adminGuardarNuevaSala"),
-    path('upd/',adminActualizarSala,name="adminActualizarSala"),
-    path('btcs/',darButacas,name="darButacas"),
-    path('peekar/<int:id>/',peekar,name="peekar"),
+    path('adminSalas/',adminSalas,name="adminSalas"),
+    path('adminSalas/<int:sala_id>/',adminDetalleSala,name="adminDetalleSala"),
+    path('adminSalas/crearSala/',adminCrearSala,name="adminCrearSala"),
+    path('adminSalas/editarSala/<int:sala_id>/',adminEditarSala,name="adminEditarSala"),
+    path('adminSalas/ded/',adminEliminarSala,name="adminEliminarSala"),
+    path('adminSalas/born/',adminGuardarNuevaSala,name="adminGuardarNuevaSala"),
+    path('adminSalas/upd/',adminActualizarSala,name="adminActualizarSala"),
+    path('adminSalas/btcs/',darButacas,name="darButacas"),
+    path('adminSalas/peekar/<int:id>/',peekar,name="peekar"),
     path('login/',login_page,name="login_page"),
     path('logout/',logout_view,name="logout_view"),
+    path('',admin_menu,name="admin_menu"),
 ]

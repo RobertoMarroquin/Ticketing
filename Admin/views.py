@@ -27,7 +27,7 @@ def login_page(request):
                 if user.is_active:
                     login(request,user)
                     message = "Te has identificado de modo correcto"
-                    return redirect("adminSalas")
+                    return redirect("admin_menu")
                 else:
                     message = "Tu usaurio esá inactivo"
             else:
@@ -36,6 +36,10 @@ def login_page(request):
         form = LoginForm()
 
     return render(request,"administrador/adminLogin.html",{"message":message,"form":form})
+
+@login_required(login_url='login_page')
+def admin_menu(request):
+    return render (request,"administrador/adminMenu.html")
 
 @login_required(login_url='login_page')
 def peekar(request,id):

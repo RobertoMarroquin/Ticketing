@@ -2,6 +2,7 @@
 {% block tittle %}Detalle de sala{% endblock %}
 {% block content %}
 <script type=text/javascript>let peekar = "{% url "peekar" sala.id %}" </script>
+<script type="text/javascript">let a="{% url "adminSalas" %}" </script>
   <div class="row">
     <div class="col-md-auto text-center"><h2>Detalle de sala</h2></div>
   </div>
@@ -62,7 +63,7 @@
                      centerVertical:"True",
                      tittle: "Confirmación",
                      message: mensaje,
-                     callback: function(){if (msg=="1")window.location.href={% url "adminSalas" %};}
+                     callback: function(){if (msg=="1")window.location.href=a;}
                  })
                 },
                 error: function (msg, textStatus, errorThrown) {alert("fail");}
