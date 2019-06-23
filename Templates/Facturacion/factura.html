@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Carrito
+{% endblock title %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'css/factura.css' %}">    
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="container-factura">
+    <h2 style="align-self: center; text-shadow: 1px 1px 2px #777777">Factura</h2><!--Titulo-->
+
+            <!--Aqui empieza el detalle de todo lo que se ha comprado-->
+            <div class="tagtexto">Detalles del carrito</div>
+            <div class="container-linea-venta">
+    
+                <div class="tagtexto">Boletos</div>
+                <div class="c">
+                    <!-- Aqui va FOR de boletos en carrito-->
+                    {% for boleto in boletos %}
+                        <div class="clinea">                                            <!-- | -->
+                            <div class="item titulo">{{boleto.nombreProducto}}</div>                         <!-- | -->
+                            <div class="item precio">precio unitario ${{boleto.precio}}</div>       <!-- | Esto es un boleto-->
+                            <div class="item">Cantidad: {{boleto.cantidad}}</div>                       <!-- | -->
+                            <div class="item total"> ${{boleto.subtotal}}</div>                        <!-- | -->
+                            <button class="item eliminar">eliminar</button>             <!-- | -->
+                        </div> 
+                    {% empty %}
+                      <h5>No hay boletos en carrito</h5>
+                    {% endfor %}
+                                                                             <!-- | -->
+                </div><!--Aqui termina la seccion de boletos de factura-->
+    
+    
+                <div class="tagtexto">Combos</div>
+                <div class="c">
+                        <!--aqui va el for para cada detalle de combo-->
+                        {% for combo in combos %}
+                            <div class="clinea"><!--Golosina del combo-->                      <!-- |-->
+                                <div class="item titulo">{{combo.nombreProducto}}</div>     <!-- |-->
+                                <div class="item">Cantidad: {{combo.cantidad}}</div>                     <!-- | golosina del combo-->
+                                <div class="item precio">$ {{combo.precio}} </div>                 <!-- |-->
+                                <div class="item total" style="width: 50%">Precio total de Combo: ${{combo.subtotal}}</div><!--Total de combo-->
+                                <button class="item eliminar" style="width: 50%;margin: 1px 0;">eliminar</button>        
+                            </div>  
+                        {% empty %}
+                          <h5>No hay combos en tu carrito</h5>
+                        {% endfor %}
+                        <br><!--Aqui termina el combo -->
+                </div><!--Aqui termina la seccion de combos comprados en la factura-->
+    
+                <!--Aqui empieza la seccion de golosinas individuales compradas-->
+                <div class="tagtexto">Golosinas</div>
+                <div class="c">
+                    {% for golosina in golosinas %}
+                    <div class="clinea">
+                            <div class="item titulo">{{golosina.nombreProducto}}</div> <!-- | -->
+                            <div class="item precio">${{golosina.precio}}</div>               <!-- | Golosina individual-->
+                            <div class="item" >Cantidad: {{golosina.cantidad}}</div>
+                            <div class="item total">${{golosina.subtotal}}</div><!--Total de combo-->
+                            <button class="item eliminar">eliminar</button>          <!-- | -->
+                    </div>
+                    {% empty %}
+                      <h5>No hay golosinas en el carrito aun</h5>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        </div>
+    
+        <br>
+    <!--Contenedor de datos del cliente -->
+<div class="container-factura"> 
+        <div class="tagtexto">Formulario de datos del cliente</div>
+
+    <div class="container-datos">
+        <form action="" method="post">
+
+        <div class="linea-datos">
+            <span>Nombre</span> <input type="text" class="p"><!--Nombre-->
+        </div>
+        <div class="linea-datos">
+            <span>Correo</span><input type="email" class="p"> <!--Correo-->
+        </div>
+        <div class="linea-datos">
+            <span>Numero de Tarjeta</span><input type="text" class="p"> <!---->
+        </div>
+        <div class="linea-datos" style="margin-right: 230px">
+            <span>CCV</span><input type="number" class="p" min="0" max="999" style="width: 70px">
+        </div>
+        <div class="linea-datos" style="margin-right: 185px">
+            <span>Fecha Vencimiento</span><input type="text" class="p" style="width: 115px" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}" title="dd/mm/aaaa">
+        </div>
+        </form>
+
+    </div>
+</div>
+    <!-- Peliculas en exhibicion Cards-->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+{% endblock content %}
+
+
+

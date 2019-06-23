@@ -13,8 +13,10 @@
     <link href="{% static 'css/all.css' %}"  rel="stylesheet" >
     <link rel="stylesheet" type="text/css" href="{% static 'css/swiper.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"> 
-    <link rel="stylesheet" href="{% static 'css/peliculas.css' %}">
-        
+    
+    {% block stylesheets %}
+      
+    {% endblock stylesheets %}        
     <script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/mostrarTostadas.js' %}" type="text/javascript" defer></script>
 </head>

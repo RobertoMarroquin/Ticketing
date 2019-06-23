@@ -22,5 +22,6 @@ from Boleteria.views import home
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cine/', include(('Boleteria.urls',"Boleteria"),namespace="boleteria")),
-    path("", home, name="home")
+    path("", home, name="home"),
+    path("facturacion/", include(('Facturacion.urls','Facturacion'),namespace='facturacion')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    Dulceria
+{% endblock title %}
+    
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'css/dulceria.css' %}">
+{% endblock stylesheets %}
+        
+
+{% block content %}
+<div class="container-dulceria">
+        <div class="tagtexto">Golosinas</div>
+        <div class="seccion">
+                <!--Aqui va el for de cada golosina de la dulceria-->
+                <div class="golosina-detalle">
+                    <div class="golosina-img">
+                        <img src="img/combo1.jpg" alt="">
+                    </div>
+                    <div class="g-detalle-item">{{Nombre de golosina}}</div>
+                    <div class="g-detalle-item">$ {{99.99}}</div>
+                    <!--escribir en lugar de funcion() el nombre de la funcion que se activa al hacer click-->
+                    <div class="g-detalle-item boton" onclick="funcion()">añadir a carrito</div>
+                </div>
+                <!--Aqui termina el for de cada golosina de la dulceria-->
+        </div>
+        <div class="tagtexto">Combos</div>
+        <div class="seccion">
+            <!--Aqui va el for de cada combo de la dulceria-->
+            <div class="combo-detalle">
+                <div class="combo-img">
+                    <img src="img/combo1.jpg" alt="">
+                </div>
+                <div class="combo-listado">
+                    <!--Aqui va el for de cada DETALLE DE COMBO de la dulceria-->
+                    <div class="combo-detalles">
+                        <div class="detalle-item">{{Nombre de golosina}}</div>
+                        <div class="detalle-item">x {{00}}</div>
+                    </div>
+                    <div class="combo-detalles">
+                        <div class="detalle-item">{{Nombre de golosina}}</div>
+                        <div class="detalle-item">x {{00}}</div>
+                    </div>
+                    <div class="combo-detalles">
+                        <div class="detalle-item">{{Nombre de golosina}}</div>
+                        <div class="detalle-item">x {{00}}</div>
+                    </div>
+                    <div class="combo-detalles">
+                        <div class="detalle-item">{{Nombre de golosina}}</div>
+                        <div class="detalle-item">x {{00}}</div>
+                    </div>
+                    <!--Aqui termina el for de cada DETALLE DE COMBO de la dulceria-->
+                    <div class="combo-detalles"  style="height: 60px">
+                        <div class="detalle-item">Precio $ {{00.00}}</div>
+                        <!--escribir en lugar de funcion() el nombre de la funcion que se activa al hacer click-->
+                        <div class="detalle-item boton" onclick="funcion()">Añadir a carrito</div> 
+                    </div>
+    
+                </div>
+    
+            </div>
+            <div class="combo-detalle">
+    
+            </div>
+            <div class="combo-detalle">
+    
+            </div>
+        </div>
+    </div>
+    
+    
+    
+            <script src="js/jquery-3.4.1.min.js"></script>
+            <script src="js/popper.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+{% endblock content %}

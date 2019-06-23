@@ -1,0 +1,180 @@
+body{
+    background: #262626;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color:#000;
+    margin: 0;
+    padding: 0;
+}
+.barrita{
+    width: 100%;
+    height: 30px;
+    margin: 30px 0;
+    background: #535856;
+}
+
+.container-factura{
+    background: #f3f3f3;
+    width: 95%;
+    margin: auto;
+    padding: 10px 50px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    border-radius: 5px;
+}
+/*contenedor FORMULARIO de datos del cliente*/
+.container-datos{
+    background: #e6e6e6;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    width: 100%;
+    border:3px dashed #535856;
+    border-radius: 5px;
+    box-shadow: inset 3px 0px 5px #aaaaaa;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+.linea-datos{
+    width: auto;
+    height: 50px;
+    margin: 5px 0;
+    box-shadow: 0px 3px 5px #aaaaaa;
+    border-radius: 10px;
+    /*background: #535856;*/
+
+    display: flex;
+    flex-flow: row nowrap; 
+    justify-content: center;
+}
+.linea-datos span{
+    margin: 0 0 0 0px;
+    background: #f7f7f7;
+    width: 160px;
+    padding: 4px 10px 4px 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 10px 0 0 10px;
+    font-size: 17px;
+    text-shadow: 1px 1px #aaaaaa;
+}
+.linea-datos .p{
+    margin: 0 0px 0 0px;
+    background: #dddddd;
+    width: 300px;
+    padding: 4px 0 4px 10px;
+    border: 5px solid #f7f7f7;
+    border-radius: 0 10px 10px 0;
+    font-size: 17px; 
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    
+}
+
+/*--------container de linea de venta---------------*/
+.tagtexto{
+    width: auto;
+    height: 35px;
+    padding: 0 30px;
+    margin-top: 20px;
+    background: #f3f3f3;
+    border-radius: 10px 10px 0 0px;
+    font-size: 23px;
+    color: #2b2b2b;
+    text-shadow: 1px 1px 2px #535856;
+
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+}
+
+.container-linea-venta{
+    background: #e6e6e6;
+    margin-bottom: 10px;
+    padding: 0 10px 10px 10px; 
+    width: 90%;
+    border:3px dashed #535856;
+    border-radius: 5px;
+    box-shadow: inset 3px 0px 5px #aaaaaa;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+ .c{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    background: #f7f7f7;
+    border-radius: 3px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+ }
+ .clinea{
+     width: 95%;
+     height: 50px;
+     padding: 5px 4px;
+     background: linear-gradient(#e9e9e9,#dddddd);
+
+     display: flex;
+     flex-flow: row nowrap;
+     justify-content: flex-start;
+ }
+.item{
+    margin-left: 1px;
+    padding: 2px 10px;
+    background: linear-gradient(#fdfdfd,#f1f1f1);
+    border-radius: 3px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    color: #262626;
+    font-size: 17px;
+    text-shadow: 1px 1px 1px #262626;
+
+}
+.eliminar{
+    background: #d13939;
+    margin: 5px;
+    color: azure;
+}
+.titulo{
+    width: 30%;
+}
+.total{
+    width: 20%;
+    justify-self: flex-end;
+    background: #f5e678
+}
+.precio{
+    background: #a9acc5
+}
+.clineac{
+    width: 95%;
+    height: auto;
+    padding: 5px 4px;
+    background: #fdfdfd;
+    border-radius: 10px 4px 4px 4px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+}
+
+
+
+
+
+
+
+

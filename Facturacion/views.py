@@ -61,10 +61,19 @@ class CarritoDetalle(View):
     def get(self, request):
         carrito = Carrito.objects.get(id=int(request.session['carrito']))
         lineasVentas = LineaVenta.objects.filter(carrito=carrito)
+
+        boletos = LineaVenta.objects.filter(carrito=carrito,tipoProducto='b')
+        golosinas = LineaVenta.objects.filter(carrito=carrito,tipoProducto='g')
+        combos = LineaVenta.objects.filter(carrito=carrito,tipoProducto='c')
+
         context = {}
         context['lineasVentas'] = lineasVentas
+        context['boletos'] = boletos
+        context['golosinas'] = golosinas
+        context['combos'] = combos
         context['carrito'] = carrito
-        return HttpResponse('GET request!')
+
+        return render(request,'Facturacion/factura.html',context)
 
     def post(self, request, *args, **kwargs):
         return HttpResponse('POST request!')
