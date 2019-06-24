@@ -7,7 +7,7 @@
 
 {% block content %}
 <link href="{% static 'css/filtro.css' %}"  rel="stylesheet" >
-  <div class="row-fluid envoltura">
+  <div class="row-fluid envoltura" id="filtros">
     <div class="span3 filtro">
       <select class="form-control"><option value="-1">Seleccione Fecha:</option></select>
     </div><br>
@@ -38,7 +38,10 @@
                 </div>
             </div>
         {% empty %}
+        <script type="text/javascript">document.getElementById("filtros").hidden=true;</script>
+        <div class="col text-center">
           <h3 style="color: whitesmoke">Lo lamentamos, no se encontraron funciones que presentar</h3>
+        </div>
         {% endfor %}
         </div>
         <script src="/static/js/filtroCartelera.js" defer></script>

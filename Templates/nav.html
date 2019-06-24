@@ -1,3 +1,8 @@
+<script type="text/javascript">let carritoBorrar="{% url 'borrarCarritoJS' %}"</script>
+<script type="text/javascript">let numCarrito="{% url 'getNumCarrito' %}"</script>
+{% csrf_token %}
+<script type="text/javascript"> let token = $('input[name=csrfmiddlewaretoken]').val();</script>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="{% url 'home' %}">Ticketing</a>
     <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,4 +34,17 @@
         </ul>
     </div>
 </nav>
+<script type="text/javascript">
+    $.ajax({
+      url: numCarrito,
+      type: "POST",
+      data : {
+        csrfmiddlewaretoken: token,
+      },
+      success: function (msg) {
+          document.getElementById("carritoN").textContent=msg;
+      },
+      error: function (msg, textStatus, errorThrown) {alert("fail");console.log(msg);console.log(textStatus);console.log(errorThrown);}
+    });
+</script>
 <script src="/static/js/timer.js" defer></script>

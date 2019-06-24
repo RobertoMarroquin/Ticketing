@@ -1,0 +1,36 @@
+{% extends "administrador/adminBase.html" %}
+{% block tittle %}Gestión de boleterías{% endblock %}
+{% block content1%}
+<style>
+  .card:not( :hover ){
+    transition: .3s all;
+    border-radius: 3px;
+    opacity: 1;
+  }
+  
+  a:link {
+    text-decoration: none;
+  }
+
+  a:visited {
+    text-decoration: none;
+  }
+
+  .card:hover {
+    transition: .3s all;
+    border-radius: 3px;
+    opacity: 0.9;
+  }
+</style>
+<br><br><br><br>
+<center>
+  <a class="text-decoration-none" href="{% url "adminSalas" %}">
+    <div class="card btn card bg-light mb-3 border-muted" style="width:256px">
+      <img class="card-img-top" src="/static/media/admin/boleteria.jpg" alt="">
+      <div class="card-body text-center">
+      <h4 class="card-tittle text-dark">Boletería</h4>
+      </div>
+    </div>
+  </a>
+</center>
+{% endblock %}

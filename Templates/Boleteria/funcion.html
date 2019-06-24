@@ -4,6 +4,9 @@
     {{funcion.pelicula.nombre}}
 {% endblock title %}
 {% block content %}
+    <script>let sa={{funcion.sala.id}};</script>
+    <script>let func={{funcion.pk}};</script>
+    <script type=text/javascript>let dispo = "{% url 'boleteria:getButacasDisp' %}" </script>
     <div class="container-fluid bg-dark" style="color: white">
         <h3>{{funcion.pelicula.nombre}}</h3>
         <div class="row">
@@ -14,7 +17,7 @@
             <p>Sinopsis : {{funcion.pelicula.sinopsis}}</p>
             <p>Pais : {{funcion.pelicula.pais}}</p>
             <p>Año : {{funcion.pelicula.anyo}}</p>
-            
+
             <form method="POST">
                 {% csrf_token %}
                     <br>
@@ -52,10 +55,7 @@
         </div>
     </div>
 </div>
-
-
 <script type="text/javascript" defer>
-
 </script>
 <script src="/static/js/validacionFuncion.js" defer></script>
 {% endblock content %}

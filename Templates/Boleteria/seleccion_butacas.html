@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+    seleccione su/s butaca/s
+{% endblock title %}
+{% block content %}
+    <div id="snackbar"></div>
+    <link href="/static/css/butacasCompra.css" rel="stylesheet">
+    <script type="text/javascript"> let aidi={{sala_id}}; </script>
+    <script type="text/javascript"> let columnas={{columnas}}; </script>
+    <script type="text/javascript"> let filas={{filas}}; </script>
+    <script type="text/javascript"> let adultos={{adultos}}; </script>
+    <script type="text/javascript"> let ninos={{ninos}}; </script>
+    <script type="text/javascript"> let mayores={{mayores}}; </script>
+    <script type="text/javascript"> let funcionID = {{funcion}} </script>
+
+    <script type=text/javascript>let p = "{% url 'darButacas' %}" </script>
+    <script type=text/javascript>let ocu = "{% url 'boleteria:darButacasOcu' %}" </script>
+    <script type=text/javascript>let a = "{% url 'boleteria:saveButacasRes' %}" </script>
+    <script type=text/javascript>let redirecto = "{% url 'home' %}" </script>
+    <center>
+        <div class="conteneidor">
+            <div class="cabeceraButacas">
+                <h2 class="text-dark" id="peticion">Por favor elija sus butacas</h2>
+                <h4 id="boletosRestantes" class="text-dark"></h4>
+            </div>
+            <br><br>
+            <div class="bodyButacas">
+                <img src="/static/Media/ButacasGrid/pantalla.png"/><br>
+                <img src="/static/Media/ButacasGrid/salidas.png"/><br>
+                <img src="/static/Media/ButacasGrid/espaceador.png"/><br>
+                <table id="tablaButacas" class="tablaButacas"></table>
+                <br>
+                <button id="confirmar" class="btn btn-primary">Confirmar Compra</button>
+            </div>
+        </div>
+    </center>
+    <script src="/static/js/comprarButacas.js" defer charset="utf-8"></script>
+{% endblock %}
