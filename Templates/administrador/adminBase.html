@@ -27,19 +27,7 @@
         {% endif %}
       </div>
       <div class="row text-center"><h1><u>Ticketing System</u></h1></div>
-
-      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-        <a class="navbar-brand nav_link" href="{%url "admin_menu" %}"><i class="fas fa-home"></i> Inicio</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="{%url "adminSalas" %}">Boletería</a>
-            </li>
-          </ul>
-        </div>
-      </nav><br>
-
-      {% block content %}{% endblock %}
+      {% block content1 %}{% endblock %}
     </div>
   </body>
 </html>

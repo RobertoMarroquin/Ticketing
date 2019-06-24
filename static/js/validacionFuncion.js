@@ -1,6 +1,6 @@
 let camposBoleteria=document.getElementsByClassName("form-control");
 let tamCampos=camposBoleteria.length;
-let butacasDisponibles=30;//esto me lo mandará el servidor
+let butacasDisponibles=10;
 let boletosTotales=0;
 
 for(let i=0;i<tamCampos;i++){
@@ -20,7 +20,7 @@ function validar(wx){
   }
   else if(boletosTotales>butacasDisponibles){
     wx.value-=(boletosTotales-butacasDisponibles);
-    tostada("¡No hay suficientes butacas disponibles!","#f8d7da","#721c24");
+    tostada("¡No puedes comprar más boletos!","#f8d7da","#721c24");
   }
   else if (wxw%1!==0){
       wx.value=Math.floor(wxw);

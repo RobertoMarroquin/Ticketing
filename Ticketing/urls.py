@@ -17,11 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from Boleteria.views import home
+from Boleteria.views import home,saveButacasRes
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cine/', include(('Boleteria.urls',"Boleteria"),namespace="boleteria")),
     path('admin_ticketing/',include('Admin.urls'),name='administracion'),
-    path("", home, name="home")
+    path("", home, name="home"),
+    path("saveBtc/",saveButacasRes,name="saveButacasRes"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

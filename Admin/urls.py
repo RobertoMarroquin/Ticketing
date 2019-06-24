@@ -26,6 +26,7 @@ urlpatterns = [
     path('adminSalas/upd/',adminActualizarSala,name="adminActualizarSala"),
     path('adminSalas/btcs/',darButacas,name="darButacas"),
     path('adminSalas/peekar/<int:id>/',peekar,name="peekar"),
+
     path('login/',login_page,name="login_page"),
     path('logout/',logout_view,name="logout_view"),
     path('',admin_menu,name="admin_menu"),
