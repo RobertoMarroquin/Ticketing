@@ -185,7 +185,6 @@ function reservar(ev){
         }
       });
     }
-    console.log(salaButacas);
   }
   boletosRestantes.textContent="Boletos Restantes: "+boletosDisponibles;
 }
@@ -216,13 +215,22 @@ function confirmarCompra(){
             mensaje6:mayores,
           },
           success: function (msg) {
-            let vencimiento=new Date();
-            let tiempoEnMinutos=5;
-            vencimiento.setTime(vencimiento.getTime()+tiempoEnMinutos*60*1000);
-            let expira ="expires="+vencimiento.toUTCString();
-            document.cookie = "reservaCarrito="+vencimiento.getTime()+";"+expira+";path=/";
-            setMinutos(tiempoEnMinutos);
-            window.location.href=redirecto;
+            bootbox.alert({
+              centerVertical:"True",
+              size: "small",
+              title: "Notificación",
+              message: "¡Reserva realizada con éxito!",
+              closeButton: false,
+              callback: function(){
+                let vencimiento=new Date();
+                let tiempoEnMinutos=5;
+                vencimiento.setTime(vencimiento.getTime()+tiempoEnMinutos*60*1000);
+                let expira ="expires="+vencimiento.toUTCString();
+                document.cookie = "reservaCarrito="+vencimiento.getTime()+";"+expira+";path=/";
+                setMinutos(tiempoEnMinutos);
+                window.location.href=redirecto;
+              }
+            });
           },
           error: function (msg, textStatus, errorThrown) {alert("fail");console.log(msg);console.log(textStatus);console.log(errorThrown);}
         });
