@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.contrib.auth import login,authenticate,logout
+from django.views import View
+
+
 from .models import Carrito,Cliente,TarjetaCredito,LineaVenta
 from Boleteria.models import Boleto
 from Dulceria.models import Combo, Golosina
-from django.views import View
 
 
 import uuid
@@ -80,3 +83,49 @@ class CarritoDetalle(View):
         return HttpResponse('POST request!')
 
 
+class VentaView(View):
+    def get(self, request):
+        return render(request,'Facturacion/venta.html',{})
+
+    def post(self, request):
+
+        context = {}
+        codigo = request.POST['codigo']
+        cliente = request.POST['cliente']
+
+        compra = Carrito.objects.filter(codigoCompra__endswith=codigo, tarjeta__cliente__nombre=cliente)
+        
+        if compra:
+            items = LineaVenta.objects.filter(carrito=compra)
+            context['compra'] = compra
+            context['items'] = items
+        else:
+            context['error'] = 'Codigo Invalido'
+        return render(request,'Facturacion/venta.html',context)
+        
+
+
+
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request,username=username,password=password)
+        if user:
+            login(request,user)
+            if 'next' in request.POST:
+                return redirect(request.POST['next'])
+            else:
+                return redirect ('facturacion:venta')
+        else:
+            return render(request,'login.html',{   'error':'Usuario o contrasena invalidos',
+                                                            'User':request.user.is_authenticated})
+    return render(request,'login.html',{'User':request.user.is_authenticated})
+
+
+def logout_func(request):
+    logout(request)
+    return redirect('facturacion:login')
+
+    

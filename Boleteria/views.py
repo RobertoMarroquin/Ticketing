@@ -65,6 +65,7 @@ class FuncionView(View):
         if adultos != 0:
             boleto = Boleto.objects.get(tipo_cliente="Adulto")
             LineaVentaSession(request,'b',boleto.id,adultos)
+            
 
         if ninos != 0:
             boleto = Boleto.objects.get(tipo_cliente="Nino")
