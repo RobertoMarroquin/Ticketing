@@ -120,6 +120,22 @@ def saveButacasRes(request):
 def borrarCarritoJS(request):
     return HttpResponse("lol")
 
+def getNumCarrito(request):
+    return HttpResponse("0")
+
+def getButacasDisp(request):
+    funcF=Funcion.objects.get(pk=request.POST['message1'])
+    salaF=get_object_or_404(Sala,funcion=funcF)
+    try:
+        boletosSala = RegistroBoletos.objects.get(funcion=request.POST['message2'])
+    except:
+        return HttpResponse("0")
+    salaF=salaF.count()
+    boletosSala=boletosSala.count()
+    diponibles=salaF-boletosSala
+
+    return HttpResponse(diponibles)
+
 #class SeleccionButacas(View):
 #    def get(self, request, datos):
 #        return render(request,"boleteria/seleccion_butacas.html",datos)

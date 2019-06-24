@@ -17,12 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from Boleteria.views import home,borrarCarritoJS
+from Boleteria.views import home,borrarCarritoJS,getNumCarrito
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cine/', include(('Boleteria.urls',"Boleteria"),namespace="boleteria")),
     path('admin_ticketing/',include('Admin.urls'),name='administracion'),
     path("", home, name="home"),
-        path("borrarCarritoJS/",borrarCarritoJS,name="borrarCarritoJS"),
+    path("borrarCarritoJS/",borrarCarritoJS,name="borrarCarritoJS"),
+    path("getNumCarrito/",getNumCarrito,name="getNumCarrito"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

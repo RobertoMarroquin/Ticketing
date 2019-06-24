@@ -4,7 +4,6 @@ const boletosRestantes=document.getElementById("boletosRestantes");
 let salaButacas;
 let boletosDisponibles=ninos+adultos+mayores;
 let butacasImagenes=[];
-let token = $('input[name=csrfmiddlewaretoken]').val();
 
 confirmar.disabled=true;
 confirmar.addEventListener("click",confirmarCompra);
