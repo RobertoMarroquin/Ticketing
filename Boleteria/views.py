@@ -11,7 +11,7 @@ from django.views.generic.edit import FormMixin
 import datetime
 import json
 
-from .models import Butaca,Pelicula,Sala,Funcion,Boleteria,Boleto
+from .models import Butaca,Pelicula,Sala,Funcion,Boleteria,Boleto,RegistroBoletos
 from Facturacion.views import CarritoSession,LineaVentaSession
 from Facturacion.models import LineaVenta,Carrito
 # Create your views here.
@@ -78,7 +78,7 @@ class FuncionView(View):
         filas=salaFuncion.numero_filas
         columnas=salaFuncion.numero_columnas
         #butacas=serializers.serialize('json',Butaca.objects.filter(Sala=salaFuncion))
-        return render(request,"boleteria/seleccion_butacas.html",{"sala_id":salaFuncion.id,"filas":filas,"columnas":columnas,"adultos":adultos,"ninos":ninos,"mayores":mayores})
+        return render(request,"boleteria/seleccion_butacas.html",{"funcion":funcion.id,"sala_id":salaFuncion.id,"filas":filas,"columnas":columnas,"adultos":adultos,"ninos":ninos,"mayores":mayores})
 
 def seleccionButacas(request):
     return render (request,"boleteria/seleccion_butacas.html")
@@ -89,7 +89,35 @@ def darButacas(request):
     p=serializers.serialize('json', lesButacas)
     return HttpResponse(p)
 
+def darButacasOcu(request):
+
+    try:
+        laSala = RegistroBoletos.objects.get(funcion=request.POST['mensaje2'])
+    except:
+        return HttpResponse("nain")
+
+    p=[]
+    for bataca in laSala:
+        bat=Butaca.objects.get(pk=bataca.butaca)
+        p.append(bat)
+    p=serializers.serialize('json', lesButacas)
+    return HttpResponse(p)
+
 def saveButacasRes(request):
+    reserva=json.loads(request.POST["mensaje1"])
+    funcionID=request.POST["mensaje2"]
+    salaID=request.POST["mensaje3"]
+    adultoBoleto=request.POST["mensaje4"]
+    ninoBoleto=request.POST["mensaje5"]
+    mayorBoleto=request.POST["mensaje6"]
+    butacaFK=[]
+
+    for butacaPk in reserva:
+        butacaFK.append(Butaca.objects.get(pk=butacaPk))
+    print(butacaFK)
+    return HttpResponse("lol")
+
+def borrarCarritoJS(request):
     return HttpResponse("lol")
 
 #class SeleccionButacas(View):

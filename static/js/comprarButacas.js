@@ -24,6 +24,23 @@ $.ajax({
   error: function (msg, textStatus, errorThrown) {alert("fail");console.log(msg);console.log(textStatus);console.log(errorThrown);}
 });
 
+$.ajax({
+  url: ocu,
+  type: "POST",
+  data : {
+    csrfmiddlewaretoken: token,
+    mensaje1:aidi,
+    mensaje2:funcionID,
+  },
+  success: function(smg){
+    if (smg!="nain"){
+      salaButacas=JSON.parse(smg);
+      liquidPaper();
+    }
+  },
+  error: function (msg, textStatus, errorThrown) {alert("fail");console.log(msg);console.log(textStatus);console.log(errorThrown);}
+});
+
 if(boletosDisponibles===1){
   boletosRestantes.hidden="true";
   document.getElementById("peticion").textContent="Por favor elija su butaca";
@@ -59,18 +76,23 @@ function artista(){
       if (!salaButacas[i*columnas+j].fields.clase){
         butacaIcon.setAttribute("src","/static/Media/ButacasGrid/transparente.png");
         divContenedor.classList.add("caminoTD");
+        divContenedor.setAttribute("numero",0);
         butacaIcon.setAttribute("id",0);
       }else if(salaButacas[i*columnas+j].fields.disponibilidad){
         butacaIcon.setAttribute("src","/static/Media/ButacasGrid/disponible.png");
+        divContenedor.setAttribute("numero",nAsiento);
         divContenedor.classList.add("butacaTD");
         butacaIcon.setAttribute("class","asientoImg");
         butacaIcon.setAttribute("reservada","false");
+        butacaIcon.setAttribute("idDB",salaButacas[i*columnas+j].pk);
         butacaIcon.setAttribute("id",nAsiento);
         divContenedor.addEventListener("click",ev=>reservar(ev));
       }else{
         butacaIcon.setAttribute("src","/static/Media/ButacasGrid/ocupada.png");
         divContenedor.classList.add("butacaTD");
+        divContenedor.setAttribute("numero",0);
         butacaIcon.setAttribute("class","asientoImg");
+        butacaIcon.setAttribute("idDB",salaButacas[i*columnas+j].pk);
         butacaIcon.setAttribute("id",nAsiento);
       }
 
@@ -97,37 +119,53 @@ function artista(){
   salaButacas=[];//ahora ésta variable guardará las butacas del cliente, se vacía
 }
 
-
+function liquidPaper(){
+  for (let i=0;i<filas;i++){
+    let tablaRow=tablaButacas.childNodes[i];
+    let tablaFil=tablaRow.id;
+    for (let j=0;j<columnas;j++){
+      let tablaDatoN=tablaRow.childNodes[j+1].childNodes[0].getAttribute("numero");
+      if (tablaDatoN!=0){
+        salaButacas.forEach(function(kas){
+          if (tablaDatoN==kas.fields.numero_asiento && tablaFil==kas.fields.fila){
+            let primerHijoDiv=tablaRow.childNodes[j+1].childNodes[0];
+            let primerHijo=primerHijoDiv.childNodes[0];
+            primerHijo.setAttribute("src","/static/Media/ButacasGrid/ocupada.png");
+            primerHijoDiv.removeEventListener('click',  reservar);
+          }
+        });
+      }
+    }
+  }
+  salaButacas=[];//ahora ésta variable guardará las butacas del cliente, se vacía
+}
 
 function reservar(ev){
-  let filButaca="";
-  let numButaca="";
+  let idButacaDB="";
   let imagen;
   objetivoClic=ev.target.getAttribute("class");
   if (objetivoClic=="asientoImg"){
-    numButaca=ev.target.id;
-    filButaca=ev.target.parentNode.parentNode.parentNode.id;
     imagen=ev.target;
+    idButacaDB=imagen.getAttribute("idDB");
   }else if (objetivoClic=="numero"){
-    numButaca=ev.target.textContent;
-    filButaca=ev.target.parentNode.parentNode.parentNode.id;
     imagen=ev.target.previousSibling;
+    idButacaDB=imagen.getAttribute("idDB");
   }
 
-  if (filButaca!="" && numButaca!=""){
+  if (idButacaDB!=""){
     if (imagen.getAttribute("reservada")=="false")
     {
       if(boletosDisponibles!=0){
         imagen.src="/static/Media/ButacasGrid/reserva.png";
         imagen.setAttribute("reservada","true");
-        salaButacas.push(new ButacaClase(numButaca,filButaca));
+        salaButacas.push(idButacaDB);
         butacasImagenes.push(imagen);
         boletosDisponibles--;
         if (boletosDisponibles==0){confirmar.removeAttribute("disabled");}
       }else{
         imagen.src="/static/Media/ButacasGrid/reserva.png";
         imagen.setAttribute("reservada","true");
-        salaButacas.push(new ButacaClase(numButaca,filButaca));
+        salaButacas.push(idButacaDB);
         butacasImagenes.push(imagen);
 
         salaButacas.splice(0,1);
@@ -141,12 +179,13 @@ function reservar(ev){
       confirmar.setAttribute("disabled","");
       boletosDisponibles++;
       salaButacas.forEach(function(sisha,index){
-        if (sisha.numero_asiento==numButaca && sisha.fila==filButaca){
+        if (sisha==idButacaDB){
           salaButacas.splice(index,1);
           butacasImagenes.splice(index,1);
         }
       });
     }
+    console.log(salaButacas);
   }
   boletosRestantes.textContent="Boletos Restantes: "+boletosDisponibles;
 }
@@ -170,12 +209,13 @@ function confirmarCompra(){
           data : {
             csrfmiddlewaretoken: token,
             mensaje1:mensaje1,
-            mensaje2:adultos,
-            mensaje3:ninos,
-            mensaje4:mayores,
+            mensaje2:funcionID,
+            mensaje3:aidi,
+            mensaje4:adultos,
+            mensaje5:ninos,
+            mensaje6:mayores,
           },
           success: function (msg) {
-            alert(msg);
             let vencimiento=new Date();
             let tiempoEnMinutos=5;
             vencimiento.setTime(vencimiento.getTime()+tiempoEnMinutos*60*1000);
@@ -189,9 +229,4 @@ function confirmarCompra(){
       }
   }
   });
-}
-
-function ButacaClase(numero_asiento,fila){
-  this.numero_asiento=numero_asiento;
-  this.fila=fila;
 }

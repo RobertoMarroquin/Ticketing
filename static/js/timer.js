@@ -40,6 +40,16 @@ else if(document.getElementById("carritoN").textContent!=0){
   document.getElementById("timer").style.color="";
   document.getElementById("carritoN").textContent=0;
   document.getElementById("timer").textContent="Carrito vaciado";
+
+  $.ajax({
+    url: carritoBorrar,
+    type: "POST",
+    data : {
+      csrfmiddlewaretoken: token,
+    },
+    success: function (msg) {},
+    error: function (msg, textStatus, errorThrown) {alert("fail");console.log(msg);console.log(textStatus);console.log(errorThrown);}
+  });
 }
 
 function getCookie(cname) {
