@@ -91,9 +91,8 @@ class RegistroBoletos(models.Model):
     funcion = models.ForeignKey(Funcion, on_delete=models.CASCADE)
     butaca = models.ForeignKey(Butaca, on_delete=models.CASCADE)
     lineaVenta = models.ForeignKey(LineaVenta, on_delete=models.CASCADE)
+    pagado = models.BooleanField(("Pagado?"))
 
-
-    
     class Meta:
         """Meta definition for RegistroBoletos."""
 
