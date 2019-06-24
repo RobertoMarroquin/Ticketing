@@ -49,7 +49,8 @@ def LineaVentaSession(request,tipoProducto,idProducto,cantidad):
                                     carrito=carrito)
     
     elif tipoProducto == 'g' :
-        golosina = Golosina.objects.create(nombreProducto=golosina.nombre,
+        golosina = Golosina.objects.get(id=idProducto)
+        LineaVenta.objects.create(nombreProducto=golosina.nombre,
                                     tipoProducto=tipoProducto,
                                     idProducto=golosina.id,
                                     cantidad=cantidad,

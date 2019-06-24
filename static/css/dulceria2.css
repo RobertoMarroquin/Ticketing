@@ -42,18 +42,6 @@ body{
     flex-flow: column nowrap;
     align-items: center;
 }
-.seccion2{
-    margin-bottom: 30px;
-    width: 95%;
-    height: auto;
-    padding: 5px;
-    background: #a9abad;
-    /*border: 5px solid #262626;*/
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    justify-content: center;
-}
 
 .combo-detalle{
     width: 95%;
@@ -111,10 +99,9 @@ body{
 .golosina-detalle{
     width: 250px;
     padding: 5px;
-    margin: 5px 10px;
     background: #fffef0;
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: row wrap;
     align-items: center;
     border-radius: 8px;
     box-shadow: 1px 0px 25px #343a40;

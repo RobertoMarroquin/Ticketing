@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('cine/', include(('Boleteria.urls',"Boleteria"),namespace="boleteria")),
     path("", home, name="home"),
+    path("dulceria/", include(('Dulceria.urls','Dulceria'),namespace='dulceria')),
     path("facturacion/", include(('Facturacion.urls','Facturacion'),namespace='facturacion')),
     path('adminSalas/',include('Admin.urls'),name='administracion'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

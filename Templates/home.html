@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/peliculas.css' %}"> 
+
+{% endblock stylesheets %}
+    
 {% block content %}   
 
 {% include 'carousel.html' %}
@@ -13,8 +20,9 @@
                 </div>
                 <div class="lado atras">
                     <h4 class="card-title">{{pelicula.nombre}}</h4>
-                    <p>{{pelicula.duracion}}</p>
-                    <p>{{pelicula.clasificacion}}</p>
+                    <p>Duracion: {{pelicula.duracion}} min</p>
+                    <p>Clasificacion: {{pelicula.clasificacion}}</p>
+                    <p>Genero: {{pelicula.genero}}</p>
                     <a href="{% url 'boleteria:funciones' pelicula.id %}" class="btn btn-primary btn-block" > ver funciones</a>
                 </div>
             </div>

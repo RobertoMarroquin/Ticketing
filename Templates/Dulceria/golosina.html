@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+    <title>{% block tittle %}Home{% endblock tittle %}</title>
+    <title>{% block tittle %}Home{% endblock tittle %}</title>
+{% block tittle %}
+    {{ golosina.nombre}}
+{% endblock tittle %}
+{% block content %}
+    <div class="container-fluid bg-dark" style="color: white">
+        <h3>{{golosina.nombre}}</h3>
+        <div class="row">
+        <div class="col-4">
+            <img src="" class="img-fluid " height=600 width="400" alt="">
+        </div>
+        <div class="col-8">
+            <h5>Precio : {{ golosina.precio}}</h5>            
+            <form method="POST">
+                {% csrf_token %}
+                    <br>
+                    <fieldset class="form-group row">
+                        <legend class="col-form-legend col-sm-12">Compra tu  golosina</legend>
+                        <div class="col-sm-12">
+
+                            <div class="form-group row justify-content-center">
+                                <div class="col-sm-4">
+                                    <label for="cantidad">Cantidad</label>
+                                    <input type="number" class="form-control" value=0 name="cantidad" id="cantidad" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group row justify-content-sm-center">
+                        <div class="">
+                            <button type="submit" id="selectButaca" class="btn btn-primary" disabled="">Agregar a Carrito</button>
+                        </div>
+                    </div>
+                </form>
+
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" defer>
+
+</script>
+<script src="/static/js/validacionFuncion.js" defer></script>
+{% endblock content %}

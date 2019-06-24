@@ -9,10 +9,10 @@
                 <a class="nav-link " href="{% url 'boleteria:cartelera' %}">Cartelera</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Promociones</a>
+                <a class="nav-link" href="{% url 'dulceria:catalogo' %}">Promociones</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="#">Dulceria</a>
+                <a class="nav-link " href="{% url 'dulceria:catalogo' %}">Dulceria</a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -22,7 +22,7 @@
           </li>
           <li class="nav-item"><a class="nav-link" id="leSeparatorTime" hidden=""> | </a></li>
           <li class="nav-item">
-              <a class="nav-link" href="#"><span class="carritoN" id="carritoN">0</span>
+              <a class="nav-link" href="{% url 'facturacion:micarrito' %}"><span class="carritoN" id="carritoN">0</span>
                 <span class="fas fa-shopping-cart"></span> Carrito
             </a>
           </li>
