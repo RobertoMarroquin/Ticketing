@@ -1,6 +1,6 @@
 linea 1
 
-parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1
+parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2
 
-parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1
-parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1 parafo1
+parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2
+parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2 parafo2
