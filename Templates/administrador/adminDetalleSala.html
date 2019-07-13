@@ -3,10 +3,6 @@
 {% block content %}
 <script type=text/javascript>let peekar = "{% url "peekar" sala.id %}" </script>
 <script type="text/javascript">let a="{% url "adminSalas" %}" </script>
-  <div class="row">
-    <div class="col-md-auto text-center"><h2>Detalle de sala</h2></div>
-  </div>
-  <br><br>
   <p class="font-weight-bold align-middle" id="sala">Sala: {{sala.nombre}}
     <button id="peekar" type="button" class="far fa-eye btn btn-outline-secondary"></button>
   </p>

@@ -1,5 +1,6 @@
 from Boleteria.models import *
 from Admin.salaForm import salaForm
+from Admin.boleteriaForms import *
 from django import forms
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, Http404
@@ -49,6 +50,14 @@ def peekar(request,id):
     return render (request,'administrador/peekar.html',{'id':id,'f':f,'c':c})
 
 @login_required(login_url='login_page')
+def darButacas(request):
+    laSala = Sala.objects.get(pk=request.POST['mensaje1'])
+    lesButacas = Butaca.objects.filter(Sala=request.POST['mensaje1'])
+    p=serializers.serialize('json', lesButacas)
+    return HttpResponse(p)
+
+#///////////////////Salas/////////////////////
+@login_required(login_url='login_page')
 def adminEliminarSala(request):
     sala_id=request.POST['mensaje']
     try:
@@ -61,13 +70,6 @@ def adminEliminarSala(request):
         return HttpResponse("0")
 
     return HttpResponse("1")
-
-@login_required(login_url='login_page')
-def darButacas(request):
-    laSala = Sala.objects.get(pk=request.POST['mensaje1'])
-    lesButacas = Butaca.objects.filter(Sala=request.POST['mensaje1'])
-    p=serializers.serialize('json', lesButacas)
-    return HttpResponse(p)
 
 @login_required(login_url='login_page')
 def adminActualizarSala(request):
@@ -143,3 +145,74 @@ def adminEditarSala (request,sala_id):
     sala = get_object_or_404(Sala,pk=sala_id)
     form=salaForm(instance=sala)
     return render(request,'administrador/adminEditarSala.html',{'form':form,'id':sala_id})
+#/////////////////////////////////////////////
+
+#/////////////////Boleteria///////////////////
+@login_required(login_url='login_page')
+def adminBoleterias(request):
+    boleterias=Boleteria.objects.all()
+    return render(request,"administrador/adminBoleterias.html",{'boleterias':boleterias})
+
+@login_required(login_url='login_page')
+def adminEliminarBoleteria(request):
+    try:
+        boleteria = Boleteria.objects.get(pk=request.POST['mensaje'])
+    except boleteria.DoesNotExist:
+        return HttpResponse ("-1")
+    try:
+        boleteria.logo.delete(save=True)
+        boleteria.delete()
+    except:
+        return HttpResponse("0")
+
+    return HttpResponse("1")
+
+@login_required(login_url='login_page')
+def adminEditarBoleteria (request,id):
+    boleteria = get_object_or_404(Boleteria,pk=id)
+    if request.method=="POST":
+        imagenActual=boleteria.logo
+        form=boleteriaForm(request.POST,request.FILES,instance=boleteria)
+
+        try:
+            formImagen=request.FILES['logo'].name
+        except:
+            formImagen=""
+
+        if formImagen!=imagenActual and imagenActual!="" and formImagen!="":
+            imagenActual.delete(save=True)
+
+        if form.is_valid():
+            if boleteria.logo!=imagenActual and boleteria.logo=="":
+                imagenActual.delete(save=True)
+            form.save()
+            return redirect ('adminBoleterias')
+    else:
+        form=boleteriaForm(instance=boleteria)
+    return render(request,'administrador/adminEditarBoleteria.html',{'form':form,'id':id})
+
+@login_required(login_url='login_page')
+def adminCrearBoleteria(request):
+    if request.method == 'POST':
+        form=boleteriaForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect ('adminBoleterias')
+    else:
+        form=boleteriaForm()
+    return render(request,'administrador/adminCrearBoleteria.html',{'form':form})
+#/////////////////////////////////////////////
+
+#/////////////////Funciones///////////////////
+@login_required(login_url='login_page')
+def adminFunciones(request):
+    funciones=Funcion.objects.all()
+    return render(request,"administrador/adminFunciones.html",{'funciones':funciones})
+#/////////////////////////////////////////////
+
+#/////////////////peliculas///////////////////
+@login_required(login_url='login_page')
+def adminPeliculas(request):
+    peliculas=Pelicula.objects.all()
+    return render(request,"administrador/adminPeliculas.html",{'peliculas':peliculas})
+#/////////////////////////////////////////////

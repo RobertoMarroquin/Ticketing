@@ -1,0 +1,47 @@
+{% extends "administrador/boleteriaBase.html" %}
+{% block tittle %}Edición de la boletería "{{form.nombre.value}}"{% endblock %}
+{% block content %}
+  <script type=text/javascript>let r = "{% url "adminBoleterias" %}" </script>
+  <link href="/static/css/formularios.css"  rel="stylesheet" >
+  <script src="/static/js/validarBoleteria.js" charset="utf-8" defer></script>
+
+  <form id="forma" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <table>
+      <tr>
+        {{ form.nombre.errors }}
+        <td class="etiqueta"><label for="{{ form.nombre.id_for_label }}">Nombre: </label></td>
+        <td>{{ form.nombre }}</td>
+      </tr>
+      <tr>
+        {{ form.eslogan.errors }}
+        <td class="etiqueta"><label for="{{ form.eslogan.id_for_label }}">Eslogan: </label></td>
+        <td>{{ form.eslogan }}</td>
+      </tr>
+      <tr><td><p></p></td></tr>
+      <tr style="border-top:1px solid #ddd;">
+        {{ form.logo.errors }}
+        <td class="etiqueta"><label for="{{ form.logo.id_for_label }}">Logo: </label></td>
+        <td>{{ form.logo }}</td>
+      </tr>
+    </table>
+    <br>
+    <button id="postGuardar" type="button" class="btn btn-success"><span class="fas fa-save"></span> Guardar</button>
+    <button type="button" id="botonVolver" class="btn btn-primary" style="margin-left:50px"><span class="fas fa-undo"></span> Regresar</button>
+  </form>
+
+  <script type="text/javascript" defer>
+    botonVolver=document.getElementById("botonVolver");
+    botonVolver.addEventListener("click",function(){
+      bootbox.confirm({
+        centerVertical:"True",
+        title: "Confirmación",
+        message: "¿Está seguro de salir y descartar los cambios realizados?",
+        buttons: {
+            cancel: {label: '<i class="fa fa-times"></i> Cancelar'},
+            confirm: {label: '<i class="fa fa-check"></i> Confirmar'}
+        },
+        callback: function (result) {if (result) window.location.href=r;}
+      });
+    });
+  </script>
+{% endblock %}

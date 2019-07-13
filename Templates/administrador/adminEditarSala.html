@@ -1,16 +1,12 @@
 {% extends "administrador/boleteriaBase.html" %}
-{% block tittle %}Editar sala{% endblock %}
+{% block tittle %}Edición de la sala "{{form.nombre.value}}"{% endblock %}
 {% block content %}
   <link href="/static/css/gestionarSala.css"  rel="stylesheet" >
+  <link href="/static/css/formularios.css"  rel="stylesheet" >
   <script type=text/javascript>let a = "{% url "adminActualizarSala" %}" </script>
   <script type=text/javascript>let p = "{% url "darButacas" %}" </script>
   <script type=text/javascript>let r = "{% url "adminSalas" %}" </script>
   <script type=text/javascript>let salaID = "{{ id }}" </script>
-
-  <div class="row">
-    <div class="col-md-auto text-center"><h2>Edición de sala "{{form.nombre.value}}"</h2></div>
-  </div>
-  <br><br>
 
   {% csrf_token %}
   <div id="accordion">
@@ -20,16 +16,29 @@
       </div>
       <div id="salaC" class="collapse show" aria-labelledby="salaCard" data-parent="#accordion">
         <div class="card-body">
-
-          {{ form.numero_sala.errors }}
-          <p><label for="{{ form.nombre.id_for_label }}">Nombre de sala: </label> {{ form.nombre }}</p>
-          {{ form.numero_sala.errors }}
-          <p><label class="fieldNumero" for="{{ form.numero_sala.id_for_label }}">Numero de sala: </label> {{ form.numero_sala }}</p>
-          {{ form.clase.errors }}
-          <p><label for="{{ form.clase.id_for_label }}">Clase de sala: </label> {{ form.clase }}</p>
-          {{ form.boleteria.errors }}
-          <p><label for="{{ form.boleteria.id_for_label }}">Boleteria: </label> {{ form.boleteria }}</p>
-
+          <table>
+            <tr>
+              {{ form.nombre.errors }}
+              <td class="etiqueta"><label for="{{ form.nombre.id_for_label }}">Nombre de sala: </label></td>
+              <td>{{ form.nombre }}</td>
+            </tr>
+            <tr>
+              {{ form.numero_sala.errors }}
+              <td class="etiqueta"><label class="fieldNumero" for="{{ form.numero_sala.id_for_label }}">Numero de sala: </label></td>
+              <td>{{ form.numero_sala }}</td>
+            </tr>
+            <tr>
+              {{ form.clase.errors }}
+              <td class="etiqueta"><label for="{{ form.clase.id_for_label }}">Clase de sala: </label></td>
+              <td>{{ form.clase }}</td>
+            </tr>
+            <tr>
+              {{ form.boleteria.errors }}
+              <td class="etiqueta"><label for="{{ form.boleteria.id_for_label }}">Boleteria: </label></td>
+              <td>{{ form.boleteria }}</td>
+            </tr>
+          </table>
+          <br>
           <button id="postGuardar" type="button" class="btn btn-success"><span class="fas fa-save"></span> Guardar</button>
           <button type="button" id="botonVolver" class="btn btn-primary" style="margin-left:50px"><span class="fas fa-undo"></span> Regresar</button>
 
@@ -48,7 +57,7 @@
           {{ form.numero_filas.errors }}
           <label class="fieldNumero" for="{{ form.numero_filas.id_for_label }}">Filas: </label> {{ form.numero_filas }}
           {{ form.numero_columnas.errors }}
-          <label class="fieldNumero" for="{{ form.numero_columnas.id_for_label }}" style="margin-left:10px">Columnas: </label> {{ form.numero_columnas }}
+          <label class="fieldNumero" for="{{ form.numero_columnas.id_for_label }}" style="margin-left:20px">Columnas: </label> {{ form.numero_columnas }}
           <br><br>
           <img src="/static/Media/ButacasGrid/pantalla.png"/><br>
           <img src="/static/Media/ButacasGrid/salidas.png"/><br>

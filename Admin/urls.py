@@ -17,6 +17,10 @@ from django.urls import path, include
 from Admin.views import *
 
 urlpatterns = [
+    path('login/',login_page,name="login_page"),
+    path('logout/',logout_view,name="logout_view"),
+    path('',admin_menu,name="admin_menu"),
+
     path('adminSalas/',adminSalas,name="adminSalas"),
     path('adminSalas/<int:sala_id>/',adminDetalleSala,name="adminDetalleSala"),
     path('adminSalas/crearSala/',adminCrearSala,name="adminCrearSala"),
@@ -27,7 +31,12 @@ urlpatterns = [
     path('adminSalas/btcs/',darButacas,name="darButacas"),
     path('adminSalas/peekar/<int:id>/',peekar,name="peekar"),
 
-    path('login/',login_page,name="login_page"),
-    path('logout/',logout_view,name="logout_view"),
-    path('',admin_menu,name="admin_menu"),
+    path('adminBoleterias/',adminBoleterias,name="adminBoleterias"),
+    path('adminBoleterias/ded/',adminEliminarBoleteria,name="adminEliminarBoleteria"),
+    path('adminBoleterias/<int:id>/',adminEditarBoleteria,name="adminEditarBoleteria"),
+    path('adminBoleterias/crearBoleteria/',adminCrearBoleteria,name="adminCrearBoleteria"),
+
+    path('adminFunciones/',adminFunciones,name="adminFunciones"),
+
+    path('adminPeliculas/',adminPeliculas,name="adminPeliculas"),
 ]
