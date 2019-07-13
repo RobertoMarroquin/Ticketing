@@ -4,4 +4,37 @@
 <div class="row">
   <div class="col-md-auto text-center"><h2>Administración de funciones</h2></div>
 </div>
+<br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Sala</th>
+      <th>Pelicula</th>
+      <th>Fecha</th>
+      <th>Hora</th>
+      <th>Lenguaje</th>
+      <th>Formato</th>
+      <th>Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for funcion in funciones %}
+      <tr>
+        <td>{{funcion.sala}}</td>
+        <td>{{funcion.pelicula}}</td>
+        <td>{{funcion.fecha}}</td>
+        <td>{{funcion.hora}}</td>
+        <td>{{funcion.lenguaje}}</td>
+        <td>{{funcion.formato}}</td>
+        <td>
+          {% if funcion.estado %}
+            <span class="far fa-check-circle"></span>
+          {% else %}
+            <span class="far fa-times-circle"></span>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
