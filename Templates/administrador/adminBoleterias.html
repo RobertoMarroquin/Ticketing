@@ -4,15 +4,15 @@
 <style>
   .card-img-top{
     height: 180px;
-    width:auto;
+    width: auto;
     max-width:100%;
-    margin-top:5px;
-    display:block;
+    object-fit: contain;
   }
   .card{
     width: 18rem;
-    display:inline-block;
-    margin: 3px 2px 4px 2px;
+    min-width: 18rem;
+    max-width: 18rem;
+    border-radius:5%;
   }
 </style>
 
@@ -23,49 +23,47 @@
   <div class="col-md-auto text-center"><a href="{% url 'adminCrearBoleteria' %}" class="btn btn-primary"><span class="fas fa-kaaba"></span> Crear Boletería</a></div>
 </div>
 <br><br>
-<center>
-  <div class="container " style="display: block;">
-    {% for boleteria in boleterias %}
-      <div class="card">
-        {% if boleteria.logo %}
-          <center>
+<div class="container">
+  <center>
+    <div class="card-deck">
+      {% for boleteria in boleterias %}
+        <div class="card mb-3 ml-2 mr-2">
+          {% if boleteria.logo %}
             <img class="card-img-top" src="{{boleteria.logo.url}}">
-          </center>
-        {% else %}
-        <div class="container bg-secondary text-white" style="height: 180px;">
-          <div class="row h-100">
-            <div class="col-sm-12 my-auto">
-                <div class="text-center">Sin imagen</div>
+          {% else %}
+          <div class="container bg-secondary text-white sinImagen" style="height: 180px; border-radius:5% 5% 0 0;">
+            <div class="row h-100">
+              <div class="col-sm-12 my-auto">
+                  <div class="text-center">Sin imagen</div>
+              </div>
             </div>
           </div>
-        </div>
-        {% endif %}
-        <div class="card-body">
-          <h5 class="card-title">{{boleteria.nombre}}</h5>
-          <p class="card-text">
-          {% if boleteria.eslogan %}
-            <i>"{{boleteria.eslogan}}"</i>
-          {% else %}
-            <i>- Sin eslogan -</i>
           {% endif %}
-          </p>
-        </div>
-        <div class="card-body">
-          <center>
+          <div class="card-body">
+            <h5 class="card-title">{{boleteria.nombre}}</h5>
+            <p class="card-text">
+            {% if boleteria.eslogan %}
+              <i>"{{boleteria.eslogan}}"</i>
+            {% else %}
+              <i>- Sin eslogan -</i>
+            {% endif %}
+            </p>
+          </div>
+          <div class="card-body">
             <a href="{%url "adminEditarBoleteria" boleteria.id %}" class="btn btn-primary"><span class="fas fa-edit"></span> Editar</a>
             <button type="buttom" class="btn btn-danger" style="margin-left:30px" onclick="delBol({{boleteria.id}})">
-              <span class="fa fa-trash"></span> Eliminar</a>
+              <span class="fa fa-trash"></span> Eliminar
             </button>
-          </center>
+          </div>
         </div>
-      </div>
-    {% empty %}
-      <div class="col-md-auto box">
-        <span class="alert alert-secondary">No hay boleterías registradas</span>
-      </div>
-    {% endfor %}
-  </div>
-</center>
+      {% empty %}
+        <div class="col-md-auto box">
+          <span class="alert alert-secondary">No hay boleterías registradas</span>
+        </div>
+      {% endfor %}
+    </div>
+  </center>
+</div>
 
 <script type="text/javascript" defer>
   function delBol(id){

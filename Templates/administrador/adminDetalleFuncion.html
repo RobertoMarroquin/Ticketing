@@ -1,0 +1,73 @@
+{% extends "administrador/boleteriaBase.html" %}
+{% block tittle %}Detalle de la función{% endblock %}
+{% block content %}
+  <script type="text/javascript">let a="{% url "adminFunciones" %}" </script>
+
+  <br>
+  <p id="boleteria">Boleteria: <b>{{funcion.sala.boleteria.nombre}}</b></p>
+  <p id="sala">Sala de exhibición: {{funcion.sala.numero_sala}} ({{funcion.sala.nombre}})</p>
+  <p id="pelicula">Película: {{funcion.pelicula}}</p>
+  <p id="fecha">Fecha: {{funcion.fecha}}</p>
+  <p id="hora">Hora: {{funcion.hora}} ({{funcion.hora|time:"g:i A"}})</p>
+  <p id="lenguaje">Lenguaje: {{funcion.lenguaje}}</p>
+  <p id="formato">Formato: {{funcion.formato}}</p>
+  <p>Estado:
+    {% if funcion.estado %}
+      <span class="far fa-check-circle text-success"> activa</span>
+    {% else %}
+      <span class="far fa-times-circle text-danger"> inactiva</span>
+    {% endif %}
+  </p>
+  <br>
+  <a href="{% url "adminEditarFuncion" funcion.id %}" class="btn btn-primary"><span class="fas fa-edit"></span> Editar</a>
+  <a href="{% url "adminFunciones" %}" class="btn btn-primary"><span class="fas fa-undo"></span> Regresar</a>
+  {% csrf_token %}
+  <button type="buttom" class="btn btn-danger" style="margin-left:30px" id="eliminarFuncion">
+    <span class="fa fa-trash"></span> Eliminar</a>
+  </button>
+
+  <script type="text/javascript" defer>
+    let botonEliminar=document.getElementById("eliminarFuncion");
+    botonEliminar.addEventListener("click",function(){
+      bootbox.confirm({
+        centerVertical:"True",
+        title: "Confirmación",
+        message: "¿Estás seguro que deseas eliminar ésta función?",
+        buttons: {
+            cancel: {label: '<i class="fa fa-times"></i> Cancelar'},
+            confirm: {label: '<i class="fa fa-check"></i> Confirmar'}
+        },
+        callback: function (result) {
+            if (result){
+              let token = $('input[name=csrfmiddlewaretoken]').val();
+              $.ajax({
+                url: "{%url "adminEliminarFuncion" %}",
+                type: "POST",
+                data : {
+                  csrfmiddlewaretoken: token,
+                  mensaje: {{funcion.id}},
+                },
+                //dataType: "json",
+                success: function (msg) {
+                  let mensaje;
+                  switch (msg){
+                    case "1":mensaje="Función eliminada con éxito!";break;
+                    case "0":mensaje="¡No ha sido posible eliminar la función!";break;
+                    case "-1":mensaje="Función no encontrada para eliminar!";break;
+                  }
+                  bootbox.alert({
+                     size: "small",
+                     centerVertical:"True",
+                     tittle: "Confirmación",
+                     message: mensaje,
+                     callback: function(){if (msg=="1")window.location.href=a;}
+                 })
+                },
+                error: function (msg, textStatus, errorThrown) {alert("fail");}
+              });
+            }
+          }
+      });
+    });
+  </script>
+{% endblock %}

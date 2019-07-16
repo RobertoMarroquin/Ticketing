@@ -1,40 +1,80 @@
 {% extends "administrador/boleteriaBase.html" %}
 {% block tittle %}Administración de funciones{% endblock %}
 {% block content %}
+<script src="/static/js/filtrarTabla.js" type="text/javascript" defer></script>
+<script src="/static/js/tablaFiltro.js" type="text/javascript" defer></script>
+
+<style>
+input[type=text] {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  font-size: 16px;
+  color:#333333;
+  background-color: white;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: 0.5;
+  transition: 0.5s;
+}
+
+input[type=text]:focus {
+  -moz-box-shadow: 0 0 2px #0050ff;
+  -webkit-box-shadow: 0 0 2px #0050ff;
+  box-shadow: 0 0 2px #0050ff;
+}
+
+th,tr{
+  cursor:pointer;
+}
+tr{
+  cursor:help;
+}
+</style>
+
 <div class="row">
   <div class="col-md-auto text-center"><h2>Administración de funciones</h2></div>
+  <div class="col-md-auto text-center"><a href="{% url 'adminCrearFuncion' %}" class="btn btn-primary"><span class="fas fa-satellite-dish"></span> Nueva función</a></div>
 </div>
-<br>
-<table class="table table-striped">
+<br><br>
+<input type="text" class="fa" name="criterio" id="criterio" placeholder="&#xf0b0;  Digite algo para filtrar...">
+<br><br>
+<table class="table text-center table-hover" id="tabla">
   <thead>
     <tr>
-      <th>Sala</th>
-      <th>Pelicula</th>
-      <th>Fecha</th>
-      <th>Hora</th>
-      <th>Lenguaje</th>
-      <th>Formato</th>
-      <th>Estado</th>
+      <th onclick="filtraTabla(0)">Boleteria<span class="fas fa-sort"></span></th>
+      <th onclick="filtraTabla(1)">Pelicula <span class="fas fa-sort"></span></th>
+      <th onclick="filtraTabla(2)">Numero de sala <span class="fas fa-sort"></span></th>
+      <th onclick="filtraTabla(3)">Fecha <span class="fas fa-sort"></span></th>
+      <th onclick="filtraTabla(4)">Hora <span class="fas fa-sort"></span></th>
+      <th onclick="filtraTabla(5)">Lenguaje <span class="fas fa-sort"></span></th>
+      <th onclick="filtraTabla(6)">Formato <span class="fas fa-sort"></span></th>
+      <th onclick="filtraTabla(7)">Estado <span class="fas fa-sort"></span></th>
     </tr>
   </thead>
   <tbody>
     {% for funcion in funciones %}
-      <tr>
-        <td>{{funcion.sala}}</td>
+      <tr id={{funcion.id}} onclick="window.location='{% url "adminDetalleFuncion" funcion.id %}';">
+        <td>{{funcion.sala.boleteria}}</td>
         <td>{{funcion.pelicula}}</td>
-        <td>{{funcion.fecha}}</td>
+        <td>{{funcion.sala.numero_sala}}</td>
+        <td>{{funcion.fecha|date:"d/m/Y"}}</td>
         <td>{{funcion.hora}}</td>
         <td>{{funcion.lenguaje}}</td>
         <td>{{funcion.formato}}</td>
         <td>
           {% if funcion.estado %}
-            <span class="far fa-check-circle"></span>
+            <span class="far fa-check-circle text-success"></span>
           {% else %}
-            <span class="far fa-times-circle"></span>
+            <span class="far fa-times-circle text-danger"></span>
           {% endif %}
         </td>
       </tr>
     {% endfor %}
   </tbody>
 </table>
+
+
 {% endblock %}

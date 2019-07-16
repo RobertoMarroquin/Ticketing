@@ -1,0 +1,98 @@
+{% extends "administrador/boleteriaBase.html" %}
+{% block tittle %}Editar función{% endblock %}
+{% block content %}
+  <link href="/static/css/formularios.css"  rel="stylesheet" >
+  <script type=text/javascript>let r = "{% url "adminFunciones" %}" </script>
+  <br>
+  <form id="forma" action="" method="post">{% csrf_token %}
+    <table>
+      <tr>
+        {{ form.pelicula.errors }}
+        <td class="etiqueta"><label for="{{ form.pelicula.id_for_label }}">Pelicula: </label></td>
+        <td>{{ form.pelicula }}</td>
+      </tr>
+      <tr>
+        {{ form.sala.errors }}
+        <td class="etiqueta"><label for="{{ form.sala.id_for_label }}">Sala: </label></td>
+        <td>{{ form.sala }}</td>
+      </tr>
+      <tr>
+        {{ form.formato.errors }}
+        <td class="etiqueta"><label for="{{ form.formato.id_for_label }}">Formato: </label></td>
+        <td>{{ form.formato }}</td>
+      </tr>
+      <tr>
+        {{ form.lenguaje.errors }}
+        <td class="etiqueta"><label for="{{ form.lenguaje.id_for_label }}">Lenguaje: </label></td>
+        <td>{{ form.lenguaje }}</td>
+      </tr>
+      <tr>
+        {{ form.fecha.errors }}
+        <td class="etiqueta"><label for="{{ form.fecha.id_for_label }}">Fecha: </label></td>
+        <td style="vertical-align:middle;">
+          <span style="display:inline-block; vertical-align:middle">{{ form.fecha }}</span>
+          <span class="btn btn-secondary" style="margin: 0 0 0 20px; display:inline-block; vertical-align:middle" id="fechaActBtn">Hoy</span>
+          <span class="btn btn-secondary" style="margin: 0 0 0 5px; display:inline-block; vertical-align:middle" id="fechaAntBtn">Restaurar</span>
+        </td>
+      </tr>
+      <tr>
+        {{ form.hora.errors }}
+        <td class="etiqueta"><label for="{{ form.hora.id_for_label }}">Hora: </label></td>
+        <td>
+          <span style="display:inline-block; vertical-align:middle;">
+            {{ form.hora }}
+            <input id="horas" style="width:80px;" type="number"></input>
+            <b class="text-secondary" style="margin: 0 2px 0 2px;">:</b>
+             <input id="minutos" style="width:80px;" type="number"></input>
+            <select id="ampm" style="width:80px;margin:0 0 0 3px;" disabled="true">
+              <option value="0" selected disabled></option>
+              <option value="1">AM</option>
+              <option value="2">PM</option>
+            </select>
+            <label class="switch">
+              <input type="checkbox" id="tipoHoraSwitch">
+              <span class="slider round">
+                <span class="on">12H</span><span class="off" style="margin:0 0 0 9px;">24H</span>
+              </span>
+            </label>
+          </span>
+          <span class="btn btn-secondary" style="margin: 0 0 0 5px; display:inline-block; vertical-align:middle;" id="horaAntBtn">Restaurar</span>
+        </td>
+      </tr>
+      <tr>
+        {{ form.estado.errors }}
+        <td class="etiqueta"><label for="{{ form.estado.id_for_label }}">Estado: </label></td>
+        <td>
+          <label class="switch">
+            {{ form.estado }}
+            <span class="slider round">
+              <span class="on"style="margin:0 0 0 2px;">Act</span><span class="off" style="margin:0 0 0 9px;">Des</span>
+            </span>
+          </label>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <button id="postGuardar" type="button" class="btn btn-success"><span class="fas fa-save"></span> Guardar</button>
+    <button type="button" id="botonVolver" class="btn btn-primary" style="margin-left:50px"><span class="fas fa-undo"></span> Regresar</button>
+  </form>
+  <br>
+  <script type="text/javascript" defer>
+    botonVolver=document.getElementById("botonVolver");
+    botonVolver.addEventListener("click",function(){
+      bootbox.confirm({
+        centerVertical:"True",
+        title: "Confirmación",
+        message: "¿Está seguro de salir y descartar los cambios realizados?",
+        buttons: {
+            cancel: {label: '<i class="fa fa-times"></i> Cancelar'},
+            confirm: {label: '<i class="fa fa-check"></i> Confirmar'}
+        },
+        callback: function (result) {if (result) window.location.href=r;}
+      });
+    });
+  </script>
+  <script src="/static/js/fechahora.js" charset="utf-8" defer></script>
+
+  <script src="/static/js/validarAdmFuncion.js" charset="utf-8" defer></script>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "administrador/boleteriaBase.html" %}
+{% block tittle %}Edición de la pelicula "{{form.nombre.value}}"{% endblock %}
+{% block content %}
+  <link href="/static/css/gestionarSala.css"  rel="stylesheet" >
+  <link href="/static/css/formularios.css"  rel="stylesheet" >
+  <script type=text/javascript>let r = "{% url "adminPeliculas" %}" </script>
+
+  <form id="forma" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <table>
+      <tr>
+        {{ form.nombre.errors }}
+        <td class="etiqueta"><label for="{{ form.nombre.id_for_label }}">Pelicula: </label></td>
+        <td>{{ form.nombre }}</td>
+      </tr>
+      <tr>
+        {{ form.pais.errors }}
+        <td class="etiqueta"><label for="{{ form.pais.id_for_label }}">Pais: </label></td>
+        <td>{{ form.pais }}</td>
+      </tr>
+      <tr>
+        {{ form.anyo.errors }}
+        <td class="etiqueta"><label for="{{ form.anyo.id_for_label }}">Año: </label></td>
+        <td>{{ form.anyo }}</td>
+      </tr>
+      <tr>
+        {{ form.duracion.errors }}
+        <td class="etiqueta"><label for="{{ form.duracion.id_for_label }}">Duración en minutos: </label></td>
+        <td>{{ form.duracion }}</td>
+      </tr>
+      <tr>
+        {{ form.sinopsis.errors }}
+        <td class="etiqueta"><label for="{{ form.sinopsis.id_for_label }}">Sinopsis: </label></td>
+        <td>{{ form.sinopsis }}</td>
+      </tr>
+      <tr>
+        {{ form.clasificacion.errors }}
+        <td class="etiqueta"><label for="{{ form.clasificacion.id_for_label }}">Clasificación: </label></td>
+        <td>{{ form.clasificacion }}</td>
+      </tr>
+      <tr>
+        {{ form.genero.errors }}
+        <td class="etiqueta"><label for="{{ form.genero.id_for_label }}">Género: </label></td>
+        <td>{{ form.genero }}</td>
+      </tr>
+      <tr>
+        {{ form.boleteria.errors }}
+        <td class="etiqueta"><label for="{{ form.boleteria.id_for_label }}">Boleteria: </label></td>
+        <td>{{ form.boleteria }}</td>
+      </tr>
+      <tr>
+        {{ form.exhibicion.errors }}
+        <td class="etiqueta"><label for="{{ form.exhibicion.id_for_label }}">Estatus de exhibición: </label></td>
+        <td>{{ form.exhibicion }}</td>
+      </tr>
+      <tr><td><p></p></td></tr>
+      <tr style="border-top:1px solid #ddd;">
+        {{ form.imagen.errors }}
+        <td class="etiqueta"><label for="{{ form.imagen.id_for_label }}">Imagen: </label></td>
+        <td>{{ form.imagen }}</td>
+      </tr>
+    </table>
+    <br>
+    <button id="postGuardar" type="button" class="btn btn-success"><span class="fas fa-save"></span> Guardar</button>
+    <button type="button" id="botonVolver" class="btn btn-primary" style="margin-left:50px"><span class="fas fa-undo"></span> Regresar</button>
+  </form>
+  <br><br>
+  <script type="text/javascript" defer>
+    botonVolver=document.getElementById("botonVolver");
+    botonVolver.addEventListener("click",function(){
+      bootbox.confirm({
+        centerVertical:"True",
+        title: "Confirmación",
+        message: "¿Está seguro de salir y descartar los cambios realizados?",
+        buttons: {
+            cancel: {label: '<i class="fa fa-times"></i> Cancelar'},
+            confirm: {label: '<i class="fa fa-check"></i> Confirmar'}
+        },
+        callback: function (result) {if (result) window.location.href=r;}
+      });
+    });
+  </script>
+  <script src="/static/js/validarPelicula.js" charset="utf-8" defer></script>
+{% endblock %}

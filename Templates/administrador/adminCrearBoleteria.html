@@ -3,7 +3,6 @@
 {% block content %}
   <script type=text/javascript>let r = "{% url "adminBoleterias" %}" </script>
   <link href="/static/css/formularios.css"  rel="stylesheet" >
-  <script src="/static/js/validarBoleteria.js" charset="utf-8" defer></script>
 
   <form id="forma" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
     <table>
@@ -28,6 +27,8 @@
     <button id="postGuardar" type="button" class="btn btn-success"><span class="fas fa-save"></span> Guardar</button>
     <button type="button" id="botonVolver" class="btn btn-primary" style="margin-left:50px"><span class="fas fa-undo"></span> Regresar</button>
   </form>
+  
+  <script src="/static/js/validarBoleteria.js" charset="utf-8" defer></script>
 
   <script type="text/javascript" defer>
     botonVolver=document.getElementById("botonVolver");

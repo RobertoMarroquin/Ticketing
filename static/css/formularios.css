@@ -1,4 +1,4 @@
-input[type=text], select {
+input[type=text],textarea {
   color:#444444;
   padding: 8px 16px;
   margin: 8px 0;
@@ -11,9 +11,49 @@ input[type=text], select {
   transition: 0.5s;
 }
 
-input[type=text]:focus,select:focus {
+input[type=text]:focus,textarea:focus {
+  -moz-box-shadow: 0 0 2px #0050ff;
+  -webkit-box-shadow: 0 0 2px #0050ff;
+  box-shadow: 0 0 2px #0050ff;
   color:black;
-  border: 1px solid #555;
+}
+
+input[type=date],input[type=time] {
+  color:#444444;
+  padding: 8px 16px;
+  margin: 8px 0;
+  display: inline-block;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  -webkit-transition:0.5s;
+  transition: 0.5s;
+}
+
+input[type=date]:focus,input[type=time]:focus {
+  -moz-box-shadow: 0 0 2px #0050ff;
+  -webkit-box-shadow: 0 0 2px #0050ff;
+  box-shadow: 0 0 2px #0050ff;
+}
+
+select {
+  color:#444444;
+  padding: 8px 16px;
+  margin: 8px 0;
+  display: inline-block;
+  width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  -webkit-transition:0.5s;
+  transition: 0.5s;
+}
+
+select:focus {
+  -moz-box-shadow: 0 0 2px #0050ff;
+  -webkit-box-shadow: 0 0 2px #0050ff;
+  box-shadow: 0 0 2px #0050ff;
 }
 
 input[type=number] {
@@ -30,7 +70,9 @@ input[type=number] {
 
 input[type=number]:focus {
   color:black;
-  border: 1px solid #555;
+  -moz-box-shadow: 0 0 2px #0050ff;
+  -webkit-box-shadow: 0 0 2px #0050ff;
+  box-shadow: 0 0 2px #0050ff;
 }
 
 input[type=file] {
@@ -44,3 +86,84 @@ input[type=file] {
 .etiqueta{
   width:130px;
 }
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 54px;
+  height: 28px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.on
+{
+  display: none;
+}
+
+.on, .off
+{
+  color: white;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  font-size: 12px;
+  font-family: Verdana, sans-serif;
+}
+
+input:checked+ .slider .on
+{display: block;left: 25%;}
+
+input:checked + .slider .off
+{display: none;}

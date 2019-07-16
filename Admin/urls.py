@@ -28,7 +28,7 @@ urlpatterns = [
     path('adminSalas/ded/',adminEliminarSala,name="adminEliminarSala"),
     path('adminSalas/born/',adminGuardarNuevaSala,name="adminGuardarNuevaSala"),
     path('adminSalas/upd/',adminActualizarSala,name="adminActualizarSala"),
-    path('adminSalas/btcs/',darButacas,name="darButacas"),
+    path('adminSalas/btcs/',darButacasAdm,name="darButacasAdm"),
     path('adminSalas/peekar/<int:id>/',peekar,name="peekar"),
 
     path('adminBoleterias/',adminBoleterias,name="adminBoleterias"),
@@ -37,6 +37,14 @@ urlpatterns = [
     path('adminBoleterias/crearBoleteria/',adminCrearBoleteria,name="adminCrearBoleteria"),
 
     path('adminFunciones/',adminFunciones,name="adminFunciones"),
+    path('adminFunciones/<int:id>/',adminDetalleFuncion,name="adminDetalleFuncion"),
+    path('adminFunciones/ded/',adminEliminarFuncion,name="adminEliminarFuncion"),
+    path('adminFunciones/editarFuncion/<int:id>/',adminEditarFuncion,name="adminEditarFuncion"),
+    path('adminFunciones/crearFuncion/',adminCrearFuncion,name="adminCrearFuncion"),
 
     path('adminPeliculas/',adminPeliculas,name="adminPeliculas"),
+    path('adminPeliculas/<int:id>/',adminDetallePelicula,name="adminDetallePelicula"),
+    path('adminPeliculas/ded/',adminEliminarPelicula,name="adminEliminarPelicula"),
+    path('adminPeliculas/editarPelicula/<int:id>/',adminEditarPelicula,name="adminEditarPelicula"),
+    path('adminPeliculas/adminCrearPelicula/',adminCrearPelicula,name="adminCrearPelicula"),
 ]

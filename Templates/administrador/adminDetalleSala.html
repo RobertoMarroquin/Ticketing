@@ -15,10 +15,10 @@
   <br>
   <a href="{% url 'adminEditarSala' sala.id %}" class="btn btn-primary"><span class="fas fa-edit"></span> Editar</a>
   <a href="{% url "adminSalas" %}" class="btn btn-primary"><span class="fas fa-undo"></span> Regresar</a>
-    {% csrf_token %}
-    <button type="buttom" class="btn btn-danger" style="margin-left:30px" id="eliminarSala">
-      <span class="fa fa-trash"></span> Eliminar</a>
-    </button>
+  {% csrf_token %}
+  <button type="buttom" class="btn btn-danger" style="margin-left:30px" id="eliminarSala">
+    <span class="fa fa-trash"></span> Eliminar</a>
+  </button>
 
   <script type="text/javascript" defer>
     let botonPeek=document.getElementById("peekar");

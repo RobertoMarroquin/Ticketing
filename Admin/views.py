@@ -50,7 +50,7 @@ def peekar(request,id):
     return render (request,'administrador/peekar.html',{'id':id,'f':f,'c':c})
 
 @login_required(login_url='login_page')
-def darButacas(request):
+def darButacasAdm(request):
     laSala = Sala.objects.get(pk=request.POST['mensaje1'])
     lesButacas = Butaca.objects.filter(Sala=request.POST['mensaje1'])
     p=serializers.serialize('json', lesButacas)
@@ -179,7 +179,7 @@ def adminEditarBoleteria (request,id):
         except:
             formImagen=""
 
-        if formImagen!=imagenActual and imagenActual!="" and formImagen!="":
+        if imagenActual!="" and formImagen!="":
             imagenActual.delete(save=True)
 
         if form.is_valid():
@@ -208,6 +208,48 @@ def adminCrearBoleteria(request):
 def adminFunciones(request):
     funciones=Funcion.objects.all()
     return render(request,"administrador/adminFunciones.html",{'funciones':funciones})
+
+@login_required(login_url='login_page')
+def adminDetalleFuncion(request,id):
+    funcion = get_object_or_404(Funcion, pk=id)
+    return render(request,'administrador/adminDetalleFuncion.html',{'funcion':funcion})
+
+@login_required(login_url='login_page')
+def adminEliminarFuncion(request):
+    try:
+        funcion = Funcion.objects.get(pk=request.POST['mensaje'])
+    except boleteria.DoesNotExist:
+        return HttpResponse ("-1")
+    try:
+        funcion.delete()
+    except:
+        return HttpResponse("0")
+
+    return HttpResponse("1")
+
+@login_required(login_url='login_page')
+def adminEditarFuncion (request,id):
+    funcion = get_object_or_404(Funcion,pk=id)
+    if request.method=="POST":
+        form=funcionForm(request.POST,instance=funcion)
+
+        if form.is_valid():
+            form.save()
+            return redirect ('adminFunciones')
+    else:
+        form=funcionForm(instance=funcion)
+    return render(request,'administrador/adminEditarFuncion.html',{'form':form,'id':id})
+
+@login_required(login_url='login_page')
+def adminCrearFuncion(request):
+    if request.method == 'POST':
+        form=funcionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect ('adminFunciones')
+    else:
+        form=funcionForm()
+    return render(request,'administrador/adminCrearFuncion.html',{'form':form})
 #/////////////////////////////////////////////
 
 #/////////////////peliculas///////////////////
@@ -215,4 +257,58 @@ def adminFunciones(request):
 def adminPeliculas(request):
     peliculas=Pelicula.objects.all()
     return render(request,"administrador/adminPeliculas.html",{'peliculas':peliculas})
+
+@login_required(login_url='login_page')
+def adminDetallePelicula(request,id):
+    pelicula = get_object_or_404(Pelicula, pk=id)
+    return render(request,'administrador/adminDetallePelicula.html',{'pelicula':pelicula})
+
+@login_required(login_url='login_page')
+def adminEliminarPelicula(request):
+    try:
+        pelicula = Pelicula.objects.get(pk=request.POST['mensaje'])
+    except pelicula.DoesNotExist:
+        return HttpResponse ("-1")
+    try:
+        pelicula.imagen.delete(save=True)
+        pelicula.delete()
+    except:
+        return HttpResponse("0")
+
+    return HttpResponse("1")
+
+@login_required(login_url='login_page')
+def adminEditarPelicula (request,id):
+    pelicula = get_object_or_404(Pelicula,pk=id)
+    if request.method=="POST":
+        imagenActual=pelicula.imagen
+        form=peliculaForm(request.POST,request.FILES,instance=pelicula)
+
+        try:
+            formImagen=request.FILES['imagen'].name
+        except:
+            formImagen=""
+
+        if imagenActual!="" and formImagen!="":
+            imagenActual.delete(save=True)
+
+        if form.is_valid():
+            if pelicula.imagen!=imagenActual and pelicula.imagen=="":
+                imagenActual.delete(save=True)
+            form.save()
+            return redirect ('adminPeliculas')
+    else:
+        form=peliculaForm(instance=pelicula)
+    return render(request,'administrador/adminEditarPelicula.html',{'form':form,'id':id})
+
+@login_required(login_url='login_page')
+def adminCrearPelicula(request):
+    if request.method == 'POST':
+        form=peliculaForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect ('adminPeliculas')
+    else:
+        form=peliculaForm()
+    return render(request,'administrador/adminCrearPelicula.html',{'form':form})
 #/////////////////////////////////////////////

@@ -1,7 +1,76 @@
 {% extends "administrador/boleteriaBase.html" %}
 {% block tittle %}Administración de peliculas{% endblock %}
 {% block content %}
+<style>
+  .card-img-top{
+    max-width:100%;
+    border-radius:3% 3% 0 0;
+    object-fit: contain;
+  }
+  .card{
+    width: 12rem;
+    min-width: 12rem;
+    max-width: 12rem;
+    border-radius:3%;
+  }
+  .card:hover{
+    cursor:pointer;
+    transition: .3s all;
+    opacity: 0.9;
+  }
+
+  .card:not( :hover ){
+    transition: .3s all;
+    opacity: 1;
+  }
+</style>
+
+{% csrf_token %}
+
 <div class="row">
-  <div class="col-md-auto text-center"><h2>Administración de peliculas</h2></div>
+  <div class="col-md-auto text-center"><h2>Administración de películas</h2></div>
+  <div class="col-md-auto text-center"><a href="{% url 'adminCrearPelicula' %}" class="btn btn-primary"><span class="fas fa-file-video"></span> Registrar película</a></div>
 </div>
+<br><br>
+<center>
+  <div class="container">
+    <div class="card-deck">
+      {% for pelicula in peliculas %}
+        <div class="card mb-3 ml-2 mr-2" onclick="window.location='{% url "adminDetallePelicula" pelicula.id %}';">
+
+          {% if pelicula.imagen %}
+            <img class="card-img-top" src="{{pelicula.imagen.url}}">
+          {% else %}
+          <div class="container bg-secondary text-white sinImagen" style="height: 285px; border-radius:3% 3% 0 0;">
+            <div class="row h-100">
+              <div class="col-sm-12 my-auto">
+                  <div class="text-center">Sin imagen</div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          <div class="card-body">
+            <h5 class="card-title">{{pelicula.nombre}}</h5>
+            <p class="card-text">
+              {% if pelicula.exhibicion == "exh" %}
+                <span class="text-success">En exhibición</span>
+              {% elif pelicula.exhibicion == "ina" %}
+                <span class="text-danger">Fuera de exhibición</span>
+              {% else %}
+                <span class="text-info">Proximamente</span>
+              {% endif %}
+            </p>
+          </div>
+          <div class="card-body">
+          </div>
+        </div>
+      {% empty %}
+        <div class="col-md-auto box">
+          <span class="alert alert-secondary">No hay películas registradas</span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</center>
 {% endblock %}
